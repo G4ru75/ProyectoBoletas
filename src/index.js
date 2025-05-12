@@ -5,11 +5,12 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Signup from './Components/SignUp';
 import Login from './Components/Login';
+import Evento from './Components/Evento';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Login/>
+    <Evento/>
   </React.StrictMode>
 );
 
