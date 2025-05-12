@@ -26,11 +26,21 @@
 }
 
 .avatar {
-    background-color: #45a8cd;
-    width: 100px;
-    height: 100px;
+    background-color: #eaeaea;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
     margin: 0 auto 30px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loginLogo{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .input {

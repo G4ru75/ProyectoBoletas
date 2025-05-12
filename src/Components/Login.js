@@ -29,7 +29,9 @@ function Login() {
     <div className={LoginStyle.container}>
       <div className={LoginStyle.loginBox}>
         <h2 className={LoginStyle.title}>BIENVENIDO</h2>
-        <div className={LoginStyle.avatar}></div>
+        <div className={LoginStyle.avatar}>
+          <img src="/imagenes/LogoBoletaYa.ico" alt="Logo" className={LoginStyle.loginLogo} />
+        </div>
         <input
           type="email"
           placeholder="Email"
