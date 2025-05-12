@@ -1,8 +1,12 @@
 import react from 'react';
 import LoginStyle from '../Styles/Login.module.css';
+import Navbar from './NavBar';
+import Footer from './Footer';
 
 function Login() {
   return (
+    <>
+    <Navbar/>
     <div className={LoginStyle.container}>
       <div className={LoginStyle.loginBox}>
         <h2 className={LoginStyle.title}>BIENVENIDO</h2>
@@ -19,13 +23,16 @@ function Login() {
         />
         <button className={LoginStyle.button}>Iniciar sesion</button>
         <div>
-          <p>¿No tienes cuenta?</p>
-          <a href="/signup">
+          <p className={LoginStyle.texto}>¿No tienes cuenta?</p>
+          <a href="/signup" className={LoginStyle.a}>
             Registrate
           </a>
         </div>
       </div>
     </div>
+    <Footer/>
+    </>
+    
   );
 }
 
