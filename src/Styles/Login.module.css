@@ -5,7 +5,7 @@
     align-items: center;
     min-height: 100vh;
     background-color: white;
-    padding: 20px;
+    padding: 10px;
 }
 
 .loginBox {
@@ -15,7 +15,7 @@
     width: 100%;
     max-width: 400px;
     text-align: center;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 4px 4px 4px 0 rgba(0, 0, 0, 0.25);
 }
 
 .title {
@@ -72,7 +72,6 @@
     text-decoration: none;
     color: #618cad;
     font-size: 1rem;
-    margin-top: 20px;
     display: inline-block;
     transition: 0.3s ease;
 }
@@ -86,7 +85,16 @@
     background-color: #005fa3;
 }
 
-/* Responsive */
+.error {
+    color: red;
+    font-size: 0.8rem;
+    text-align: left;
+    margin-top: -0.5rem;
+    margin-bottom: 0.5rem;
+    font-family: sans-serif;
+}
+
+
 @media (max-width: 480px) {
     .loginBox {
     padding: 30px 20px;
