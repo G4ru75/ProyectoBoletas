@@ -10,8 +10,10 @@ function Navbar() {
 
     return (
         <header className={NavbarStyle.navbar}>
-        <div className={NavbarStyle.logo}></div>
-        <h1 className={NavbarStyle.title}>Nombre de la pagina</h1>
+        <div className={NavbarStyle.logo}>
+            <img src="/imagenes/LogoBoletaYa.ico" alt="Logo" className={NavbarStyle.logoImg} />
+        </div>
+        <h1 className={NavbarStyle.title}>Boletas ya</h1>
         <div className={NavbarStyle.hamburger} onClick={toggleMenu}>
         <span />
         <span />
