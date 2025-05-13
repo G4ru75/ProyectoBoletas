@@ -2,6 +2,9 @@ import react, {useState, useEffect} from 'react';
 import LoginStyle from '../Styles/Login.module.css';
 import Navbar from './NavBar';
 import Footer from './Footer';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -32,21 +35,18 @@ function Login() {
         <div className={LoginStyle.avatar}>
           <img src="/imagenes/LogoBoletaYa.ico" alt="Logo" className={LoginStyle.loginLogo} />
         </div>
-        <input
-          type="email"
-          placeholder="Email"
-          className={LoginStyle.input}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        {errores.email && (<span className ={LoginStyle.error}>{errores.email}</span>)}
-        <input
-          type="contraseña"
-          placeholder="Contraseña"
-          className={LoginStyle.input}
-          onChange={(e) => setContraseña(e.target.value)}
-        />
-        {errores.contraseña && <span className={LoginStyle.error}>{errores.contraseña}</span>}
 
+        <div className="form-floating mb-3">
+          <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com" onChange={(e) => setEmail(e.target.value)}/>
+          <label for="floatingInput">Correo</label>
+          {errores.email && (<span className ={LoginStyle.error}>{errores.email}</span>)}
+        </div>
+        <div className="form-floating">
+          <input type="password" className="form-control" id="floatingPassword" placeholder="Contraseña" onChange={(e) => setContraseña(e.target.value)}/>
+          <label for="floatingPassword">Contraseña</label>
+          {errores.contraseña && <span className={LoginStyle.error}>{errores.contraseña}</span>}
+        </div>
+        <br/>
         <button className={LoginStyle.button}>Iniciar sesion</button>
         <div>
           <p className={LoginStyle.texto}>¿No tienes cuenta?</p>
