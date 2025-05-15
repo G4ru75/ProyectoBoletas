@@ -31,13 +31,13 @@ function Login() {
     <Navbar/>
     <div className={LoginStyle.container}>
       <div className={LoginStyle.loginBox}>
-        <h2 className={LoginStyle.title}>BIENVENIDO</h2>
         <div className={LoginStyle.avatar}>
           <img src="/imagenes/LogoBoletaYa.ico" alt="Logo" className={LoginStyle.loginLogo} />
         </div>
+        <h2 className={LoginStyle.title}>BIENVENIDO</h2>
 
-        <div className="form-floating mb-3">
-          <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com" onChange={(e) => setEmail(e.target.value)}/>
+        <div className="form-floating mb-3 ">
+          <input type="email" className="form-control h-75 d-inline-block" id="floatingInput" placeholder="name@example.com" onChange={(e) => setEmail(e.target.value)}/>
           <label for="floatingInput">Correo</label>
           {errores.email && (<span className ={LoginStyle.error}>{errores.email}</span>)}
         </div>
