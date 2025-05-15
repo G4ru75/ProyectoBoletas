@@ -6,11 +6,14 @@ import reportWebVitals from './reportWebVitals';
 import Signup from './Components/SignUp';
 import Login from './Components/Login';
 import Evento from './Components/Evento';
+import EspecificacionDeCompra from './Components/EspecificacionDeCompra';
+import CompraBoleta from './Components/CompraBoleta';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Evento/>
+    <EspecificacionDeCompra/>
   </React.StrictMode>
 );
 
