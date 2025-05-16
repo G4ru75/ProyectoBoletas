@@ -5,11 +5,15 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Signup from './Components/SignUp';
 import Login from './Components/Login';
+import BarraBusqueda from './Components/BarraBusqueda';
+import CartaEvento from './Components/CartaEvento';
+import Navbar from './Components/NavBar';
+import Footer from './Components/Footer';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Login/>
+    <CartaEvento/>
   </React.StrictMode>
 );
 

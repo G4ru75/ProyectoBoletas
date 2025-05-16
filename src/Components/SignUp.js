@@ -38,7 +38,7 @@ function Signup() {
             minLength={7}
             required
             pattern="[0-9]+"
-            title='verifique que el numero de identificacion sea correcto'
+            
             />
 
             <label>Teléfono</label>
@@ -48,7 +48,6 @@ function Signup() {
             maxLength={10}
             minLength={10}
             pattern='[0-9]+'
-            title='verifique que el numero de telefono sea correcto'
             required
             />
 
@@ -56,7 +55,7 @@ function Signup() {
             <input type="email" 
             placeholder='Digite su email'
             pattern='[^\s@]+@[^\s@]+\.[^\s@]+'
-            title="El email no es válido"
+            title="El email debe tener un formato válido"
             required
             />
 
