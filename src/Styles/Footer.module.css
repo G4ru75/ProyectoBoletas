@@ -1,0 +1,60 @@
+.footer {
+background-color: #2b72f1;
+color: white;
+display: flex;
+justify-content: space-between;
+padding: 30px 40px;
+flex-wrap: wrap;
+text-align: center;
+}
+
+.column {
+flex: 1;
+min-width: 200px;
+margin: 10px 0;
+
+}
+
+.title {
+font-family: sans-serif;
+font-weight: bold;
+font-size: 1.3rem;
+margin-bottom: 8px;
+}
+
+.link {
+font-family: sans-serif;
+font-size: 1.1rem;
+color: white;
+text-decoration: none;
+margin: 4px 0;
+display: block;
+transition: color 0.2s;
+padding: 9px 0;
+}
+
+.link:hover {
+color: #cfd8dc;
+text-decoration: underline;
+}
+
+.NombreP{
+display: flex;
+justify-content: center;
+font-family: sans-serif;
+font-size: 3rem;
+color: white;
+font-weight: bold;
+}
+
+@media (max-width: 768px) {
+.footer {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.column {
+    text-align: center;
+}
+}

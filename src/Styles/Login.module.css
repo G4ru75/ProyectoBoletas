@@ -5,7 +5,7 @@
     align-items: center;
     min-height: 100vh;
     background-color: white;
-    padding: 20px;
+    padding: 10px;
 }
 
 .loginBox {
@@ -15,7 +15,7 @@
     width: 100%;
     max-width: 400px;
     text-align: center;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 4px 4px 4px 0 rgba(0, 0, 0, 0.25);
 }
 
 .title {
@@ -26,11 +26,21 @@
 }
 
 .avatar {
-    background-color: #45a8cd;
-    width: 100px;
-    height: 100px;
+    background-color: #eaeaea;
+    width: 200px;
+    height: 150px;
     border-radius: 50%;
     margin: 0 auto 30px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loginLogo{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .input {
@@ -63,11 +73,38 @@
     transition: background-color 0.3s ease;
 }
 
+.texto{
+    font-family: sans-serif;
+    font-size: 16px;
+}
+
+.a{
+    text-decoration: none;
+    color: #618cad;
+    font-size: 1rem;
+    display: inline-block;
+    transition: 0.3s ease;
+}
+
+.a:hover {
+    text-decoration: underline;
+    color: #005fa3;
+}
+
 .button:hover {
     background-color: #005fa3;
 }
 
-/* Responsive */
+.error {
+    color: red;
+    font-size: 0.8rem;
+    text-align: left;
+    margin-top: -0.5rem;
+    margin-bottom: 0.5rem;
+    font-family: sans-serif;
+}
+
+
 @media (max-width: 480px) {
     .loginBox {
     padding: 30px 20px;
