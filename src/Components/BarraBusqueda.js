@@ -11,7 +11,7 @@ function BarraBusqueda() {
         placeholder="BUSCAR...."
         className={BarraBusquedaStyle.searchInput}
         />
-        <input type='date' placeholder='Fecha' className={BarraBusquedaStyle.filter}></input>
+        <input type='date' className={BarraBusquedaStyle.filter}></input>
         <select className={BarraBusquedaStyle.filter}>
         <option>Categoría</option>
         <option value="Seminario">Seminario</option>
