@@ -18,6 +18,7 @@ root.render(
     <BarraBusqueda/>
     <h1>Eventos disponibles</h1>
     <ListaEventos/>
+    <Footer/>
 
   </React.StrictMode>
 );

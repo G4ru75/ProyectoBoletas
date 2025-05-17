@@ -15,9 +15,9 @@ function Navbar() {
         </div>
         <h1 className={NavbarStyle.title}>Boletas ya</h1>
         <div className={NavbarStyle.hamburger} onClick={toggleMenu}>
-        <span />
-        <span />
-        <span />
+            <span/>
+            <span/>
+            <span/>
         </div>
 
         <nav className={`${NavbarStyle.menu} ${menuAbierto ? NavbarStyle.show : ""}`}>
