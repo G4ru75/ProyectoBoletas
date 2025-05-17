@@ -21,6 +21,12 @@
     min-width: 120px;
 }
 
+.IconoCalendario{
+    display: flex; 
+    align-items: center;
+    gap: 0.5rem
+}
+
 .filter {
     border: none;
     padding: 15px 30px;

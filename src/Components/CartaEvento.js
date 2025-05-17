@@ -1,33 +1,56 @@
 import react from 'react'; 
 import cartaEventoStyle from '../Styles/CartaEvento.module.css';
+import {Calendar, Clock, MapPin, Timer} from "lucide-react";
+
 
 function cartaEvento(){
     return(
         <>
-        <div className={cartaEventoStyle.card}>
-            <div className={cartaEventoStyle.imageArea}>
-                <img src="/imagenes/Captura de pantalla 2024-12-01 193725.png" alt="Evento" className={cartaEventoStyle.image}/>
+        <div className={cartaEventoStyle.tarjeta} style={{margin: "0 auto"}}>
+            <div className={cartaEventoStyle.contenedorImagen}>
+                <img src="/imagenes/Captura de pantalla 2024-12-01 193725.png" alt="Evento" className={cartaEventoStyle.imagen}/>
             </div>
-        <h3 className={cartaEventoStyle.title}>Evento</h3>
 
-        <div className={cartaEventoStyle.infoRow}>
-            <div className={cartaEventoStyle.infoBlock}>
-                <span className={cartaEventoStyle.labelWhite}>HORA</span>
-                <p className={cartaEventoStyle.text}>2222</p>
-            </div>
-            <div className={cartaEventoStyle.infoBlock}>
-                    <span className={cartaEventoStyle.label}>FECHA</span>
-                    <span className={cartaEventoStyle.text}>aaaa</span>
-                    <span className={cartaEventoStyle.label}>DURACIÓN</span>
-                    <span className={cartaEventoStyle.text}>aaa</span>
+        <div className={cartaEventoStyle.contenido}>
+            <h3 className={cartaEventoStyle.titulo}>Evento</h3>
+
+            <div className={cartaEventoStyle.rejillaInfo}>
+                <div className={cartaEventoStyle.elementoInfo}>
+                    <Clock className={cartaEventoStyle.icono} size={16}/>
+                    <div>
+                        <span className={cartaEventoStyle.etiqueta}>Hora</span>
+                        <p className={cartaEventoStyle.texto}>2222</p>
+                    </div>
+                </div>
+            
+
+                <div className={cartaEventoStyle.elementoInfo}>
+                    <Calendar className={cartaEventoStyle.icono} size={16}/>
+                    <div>
+                        <span className={cartaEventoStyle.etiqueta}>Fecha</span>
+                        <p className={cartaEventoStyle.texto}>2222</p>
+                    </div>
+                </div>
+
+                <div className={cartaEventoStyle.elementoInfo}>
+                    <Timer className={cartaEventoStyle.icono} size={16}/>
+                    <div>
+                        <span className={cartaEventoStyle.etiqueta}>Duracion</span>
+                        <p className={cartaEventoStyle.texto}>2222</p>
+                    </div>
+                </div>
+
+                <div className={cartaEventoStyle.elementoInfo}>
+                    <MapPin className={cartaEventoStyle.icono} size={16}/>
+                    <div>
+                        <span className={cartaEventoStyle.etiqueta}>Lugar</span>
+                        <p className={cartaEventoStyle.texto}>2222</p>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div className={cartaEventoStyle.locationRow}>
-            <span className={cartaEventoStyle.label}>LUGAR</span>
-            <p className={cartaEventoStyle.text}>erere</p>
-        </div>
-        <button className={cartaEventoStyle.button}>Comprar</button>
+            <button className={cartaEventoStyle.boton}>Comprar</button>
         </div>
     </>
     ); 
