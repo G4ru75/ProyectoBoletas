@@ -9,11 +9,16 @@ import BarraBusqueda from './Components/BarraBusqueda';
 import CartaEvento from './Components/CartaEvento';
 import Navbar from './Components/NavBar';
 import Footer from './Components/Footer';
+import ListaEventos from './Components/ListaEventos';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <CartaEvento/>
+    <Navbar/>
+    <BarraBusqueda/>
+    <h1>Eventos disponibles</h1>
+    <ListaEventos/>
+
   </React.StrictMode>
 );
 

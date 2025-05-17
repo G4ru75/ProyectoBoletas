@@ -2,6 +2,7 @@ import react from 'react';
 import cartaEventoStyle from '../Styles/CartaEvento.module.css';
 import {Calendar, Clock, MapPin, Timer} from "lucide-react";
 
+
 function cartaEvento(){
     return(
         <>
