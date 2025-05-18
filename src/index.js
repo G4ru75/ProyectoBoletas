@@ -8,12 +8,14 @@ import Login from './Components/Login';
 import Evento from './Components/Evento';
 import EspecificacionDeCompra from './Components/EspecificacionDeCompra';
 import CompraBoleta from './Components/CompraBoleta';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import BarraBusqueda from './Components/BarraBusqueda';
+import NavBar from './Components/NavBar';
+import CartaEvento from './Components/CartaEvento';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <EspecificacionDeCompra/>
+    <CartaEvento/>
   </React.StrictMode>
 );
 

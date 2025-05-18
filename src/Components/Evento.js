@@ -52,7 +52,7 @@ function Evento({ eventoInicial, onAgregar, onModificar }) {
     };
     
     return (
-        <form onSubmit={handleSubmit} className='bg-gray-100 p-6  rounded-xl shadow-md w-full max-w-4xl mx-auto my-8'>
+        <form onSubmit={handleSubmit} className='bg-gray-100 p-6  rounded-xl  w-full max-w-4xl mx-auto my-8'>
             <h1 className='text-2xl font-semibold text-gray-800 mb-4 text-center'>GESTIÓN EVENTO</h1>
             <div className="border-b-2 border-blue-500 mb-6"></div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
