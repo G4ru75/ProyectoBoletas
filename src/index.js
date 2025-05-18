@@ -9,13 +9,13 @@ import Evento from './Components/Evento';
 import EspecificacionDeCompra from './Components/EspecificacionDeCompra';
 import CompraBoleta from './Components/CompraBoleta';
 import BarraBusqueda from './Components/BarraBusqueda';
-import NavBar from './Components/NavBar';
 import CartaEvento from './Components/CartaEvento';
+import NavBar from './Components/navbar';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <CartaEvento/>
+    <NavBar/>
   </React.StrictMode>
 );
 
