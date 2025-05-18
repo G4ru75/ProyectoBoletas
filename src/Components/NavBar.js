@@ -1,7 +1,7 @@
 import react, {useState} from 'react';
-import NavbarStyle from '../Styles/NavBar.module.css';
 
-function Navbar() {
+
+function NavBar() {
     const [menuAbierto, setMenuAbierto] = useState(false);
 
     const toggleMenu = () => {

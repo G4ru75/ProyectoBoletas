@@ -10,12 +10,11 @@ import EspecificacionDeCompra from './Components/EspecificacionDeCompra';
 import CompraBoleta from './Components/CompraBoleta';
 import BarraBusqueda from './Components/BarraBusqueda';
 import CartaEvento from './Components/CartaEvento';
-import NavBar from './Components/navbar';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <NavBar/>
+    <Signup/>
   </React.StrictMode>
 );
 
