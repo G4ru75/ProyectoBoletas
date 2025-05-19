@@ -5,7 +5,6 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Signup from './Components/SignUp';
 import Login from './Components/Login';
-
 import BarraBusqueda from './Components/BarraBusqueda';
 import CartaEvento from './Components/CartaEvento';
 import Navbar from './Components/navbar';
@@ -16,7 +15,6 @@ import ListaEventos from './Components/ListaEventos';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-
     <Footer/>
   </React.StrictMode>
 );
