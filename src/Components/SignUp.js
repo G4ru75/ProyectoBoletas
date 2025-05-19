@@ -1,6 +1,6 @@
 import react from 'react';
 import SignUpStyle from '../Styles/SignUp.module.css';
-import Navbar from './NavBar';
+import Navbar from './navbar';
 import Footer from './Footer';
 function Signup() {
   return (

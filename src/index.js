@@ -7,18 +7,15 @@ import Signup from './Components/SignUp';
 import Login from './Components/Login';
 import BarraBusqueda from './Components/BarraBusqueda';
 import CartaEvento from './Components/CartaEvento';
-import Navbar from './Components/NavBar';
+import Navbar from './Components/navbar';
 import Footer from './Components/Footer';
 import ListaEventos from './Components/ListaEventos';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Navbar/>
-    <BarraBusqueda/>
-    <h1>Eventos disponibles</h1>
-    <ListaEventos/>
     <Footer/>
+    
 
   </React.StrictMode>
 );

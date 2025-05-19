@@ -2,7 +2,7 @@
 display: flex;
 align-items: center;
 justify-content: space-between;
-background-color: #2979ff;
+background-color: #356fd3;
 padding: 10px 30px;
 position: relative;
 flex-wrap: wrap;
@@ -16,7 +16,7 @@ flex-wrap: wrap;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #2979ff;
+    background-color: #356fd3;
 }
 
 .logoImg{
@@ -57,7 +57,7 @@ flex-direction: column;
 position: static;
 top: 100%;
 right: 0;
-background-color: #2979ff;
+background-color: #356fd3;
 width: 100%;
 text-align: center;
 padding: 10px 0;
@@ -75,7 +75,8 @@ font-family: sans-serif;
 
 
 .menu a:hover {
-background-color: #1c5ed6;
+background-color: #5183df;
+border-radius: 12px;
 }
 
 .show {
@@ -94,5 +95,30 @@ display: flex;
 
     .title {
         font-size: 2.5rem;
+        margin-left: 15px;
+    }
+}
+
+@media (max-width: 480px){
+    .logo{
+        width: 80px;
+        height: 80px;
+    }
+
+    .title{
+        font-size: 2rem;
+        margin-left: 5px;
+    }
+}
+
+@media (max-width: 320px){
+    .logo{
+        width: 0px;
+        height: 0px;
+    }
+
+    .title{
+        font-size: 1.5rem;
+        margin-left: 5px;
     }
 }

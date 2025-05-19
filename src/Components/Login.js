@@ -1,6 +1,6 @@
 import react, {useState, useEffect} from 'react';
 import LoginStyle from '../Styles/Login.module.css';
-import Navbar from './NavBar';
+import Navbar from './navbar';
 import Footer from './Footer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';

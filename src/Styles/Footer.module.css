@@ -1,5 +1,5 @@
 .footer {
-background-color: #2b72f1;
+background-color: #356fd3;
 color: white;
 display: flex;
 justify-content: space-between;
@@ -57,4 +57,17 @@ font-weight: bold;
 .column {
     text-align: center;
 }
+
+.link {
+    font-size: 1rem;
+}
+
+.NombreP{
+    font-size: 2rem;
+}
+
+.column {
+    font-size: 1rem;
+}
+
 }
