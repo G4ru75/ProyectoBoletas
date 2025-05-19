@@ -10,6 +10,12 @@
     gap: 10px;
 }
 
+.FondoBlanco{
+    background-color: white !important;
+    border-radius: 12px;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
 .searchInput {
     font-family: sans-serif;
     flex: 1 1 200px;
@@ -21,10 +27,10 @@
     min-width: 120px;
 }
 
-.IconoCalendario{
-    display: flex; 
+.IconoCalendario {
+    display: flex;
     align-items: center;
-    gap: 0.5rem
+    gap: 0.5rem;
 }
 
 .filter {
@@ -55,24 +61,81 @@
     background-color: #1547b3;
 }
 
-@media (max-width: 768px) {
+/* Nuevos estilos para el menú de filtros */
+.filtersDesktop {
+    display: flex;
+    gap: 10px;
+}
+
+.filterToggle {
+    display: none;
+    align-items: center;
+    gap: 5px;
+    background-color: #142958;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 8px 15px;
+    font-family: sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.filtersMobile {
+    display: none;
+    background-color: #e2e2e2;
+    border-radius: 15px;
+    padding: 15px;
+    margin: -10px auto 20px;
+    width: 85%;
+}
+
+.filterItem {
+    margin-bottom: 15px;
+}
+
+.filterItem label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-family: sans-serif;
+}
+
+@media (max-width: 850px) {
     .searchBar {
-        flex-direction: row;
-        align-items: end; 
-        border-radius: 20px;
+        width: 90%;
+        border-radius: 30px;
     }
 
-    .searchInput,
-    .filter{
-        width: 40%;
+    .searchInput {
+        font-size: 18px;
+        padding: 10px;
+        width: 100%;
+        min-width: unset;
+    }
+
+    .filtersDesktop {
+        display: none;
+    }
+
+    .filterToggle {
+        display: flex;
+    }
+
+    .filtersMobile {
+        display: block;
+    }
+
+    .filter {
+        width: 100%;
         min-width: unset;
         border-radius: 10px;
     }
 
     .searchButton {
         font-size: 18px;
-        padding: 5px;
-        width: 100%;
+        padding: 5px 20px;
+        width: auto;
         min-width: unset;
         border-radius: 10px;
     }

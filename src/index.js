@@ -15,6 +15,9 @@ import ListaEventos from './Components/ListaEventos';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <Navbar/>
+    <BarraBusqueda/>
+    <ListaEventos/>
     <Footer/>
   </React.StrictMode>
 );
