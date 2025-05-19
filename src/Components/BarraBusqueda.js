@@ -24,9 +24,9 @@ function BarraBusqueda() {
 
             <button className={BarraBusquedaStyle.searchButton}>
             <Search size={30} color='white' strokeWidth={4} />
-            
             </button>
         </div>
+
         </>
     );
 }

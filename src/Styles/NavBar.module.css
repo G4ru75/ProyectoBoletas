@@ -70,6 +70,7 @@ padding: 10px 0;
 display: block;
 transition: background 0.2s;
 font-family: sans-serif;
+
 }
 
 
@@ -83,7 +84,6 @@ border-radius: 12px;
 display: flex;
 }
 
-/* Desktop view */
 @media (max-width: 768px) {
     .menu {
         width: 100%;

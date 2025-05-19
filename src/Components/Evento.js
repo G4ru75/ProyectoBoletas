@@ -57,7 +57,9 @@ function Evento({ eventoInicial, onAgregar, onModificar }) {
             <div className="border-b-2 border-blue-500 mb-6"></div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
                 <div className="mb-4" >
-                    <label className="block text-gray-700 text-sm font-bold mb-2">Nombre</label>
+                  
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Nombre</label>
+
                     <input type="text" placeholder="Nombre" value={nombre} onChange={(e) => setNombre(e.target.value)}
                     className=" appearance-none border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500" required />
                 </div>
@@ -68,7 +70,8 @@ function Evento({ eventoInicial, onAgregar, onModificar }) {
                 </div>
     
                 <div className="mb-4">
-                    <label  className="block text-gray-700 text-sm font-bold mb-2">Tipo Boleta</label>
+                    <label  class="block text-gray-700 text-sm font-bold mb-2">Tipo Boleta</label>
+
                     <select value={tipoBoleta} onChange={(e) => setTipoBoleta(e.target.value)}
                         className=" appearance-none border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                         <option value="general">General</option>
