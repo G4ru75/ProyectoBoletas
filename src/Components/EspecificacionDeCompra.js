@@ -20,10 +20,18 @@ return (
                 <input type="text" placeholder="Nombre" className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" required readOnly />
             </div>
                 
+
             <div className="mb-3">
                 <label className="block text-sm font-bold mb-1">CATEGORIA DE ENTRADA</label>
-                <input type="text" placeholder="Categoría" className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" required readOnly />
+                <select className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"required>
+                    <option value="vip">General</option>
+                    <option value="estandar">Estándar</option>
+                    <option value="premium">Premium</option>
+                    <option value="general">VIP</option>
+                </select>
             </div>
+
+
             <div className="mb-3">
                 <label className="block text-sm font-bold mb-1">PRECIO</label>
                 <input type="text" placeholder="Precio" className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" required readOnly />
