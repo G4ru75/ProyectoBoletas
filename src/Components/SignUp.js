@@ -48,19 +48,50 @@ function Signup() {
 const handleSubmit = (e) => {
     e.preventDefault();
     if (Object.keys(errores).length === 0) {
-      Swal.fire({
-                title:"Usuario registrado correctamente!",
-                icon: "success",
-                draggable: true
-            });
 
-      setApellido('');
-      setNombre('');
-      setTelefono('');
-      setNombreUsuario('');
-      setEmail('');
-      setContraseña('');
+        const Usuario = {
+          nombre: nombre,
+          apellido: apellido,
+          telefono: telefono,
+          nombreUsuario: nombreUsuario,
+          passwordHash: contraseña,
+          correo: email
+        }
 
+        fetch('https://localhost:7047/api/Login/Register', {
+                method: 'POST', 
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(Usuario)
+
+            }).then(async response => {
+  const message = await response.text(); // como desde la Api mandan el mensaje en texto plano
+  if (!response.ok) {                   // entonces esa linea lo cambia a tect en el front
+    Swal.fire({
+    icon: "error",
+    title: "Oops...",
+    text: message,
+    });
+  }else {
+    Swal.fire({
+    title: message,
+    icon: "success",
+    draggable: true
+  });
+
+  setApellido('');
+  setNombre('');
+  setTelefono('');
+  setNombreUsuario('');
+  setEmail('');
+  setContraseña('');
+
+  }
+
+  
+})
+    
     } else {
       console.log('Errores en el formulario:', errores);
     }
