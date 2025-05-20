@@ -1,5 +1,10 @@
-import react from 'react';
-import { useState, useEffect } from 'react';
+import react, {useState, useEffect} from 'react';
+import LoginStyle from '../Styles/Login.module.css';
+import Navbar from './navbar';
+import Footer from './Footer';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -21,43 +26,40 @@ function Login() {
   },[email, contraseña]); 
 
 
-return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-50">
-      <div className="bg-gray-100 p-6 rounded-xl w-full max-w-md mx-auto shadow-md">
-        <h2 className="text-xl font-bold text-center mb-6">BIENVENIDO</h2>
-        <div className="border-b-2 border-blue-500 mb-6"></div>
-        <form className="space-y-4">
-          <div>
-            <input
-              type="email"
-              placeholder="Email"
-              className="w-full border rounded-md p-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
-          </div>
-          <div>
-            <input
-              type="password"
-              placeholder="Contraseña"
-              className="w-full border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
-          </div>
-          <div className="mt-6 flex justify-center">
-            <button className="bg-green-500 hover:bg-green-700 text-white font-bold p-4 rounded-md w-full focus:outline-none transform transition-all hover:scale-105">
-              Iniciar sesion
-            </button>
-          </div>
-          <div className="text-center mt-4">
-            <p className="text-gray-700">¿No tienes cuenta?</p>
-            <a href="/signup" className="text-green-500 hover:underline">
-              Registrate
-            </a>
-          </div>
-        </form>
+  return (
+    <>
+    <Navbar/>
+    <div className={LoginStyle.container}>
+      <div className={LoginStyle.loginBox}>
+        <div className={LoginStyle.avatar}>
+          <img src="/imagenes/LogoBoletaYa.ico" alt="Logo" className={LoginStyle.loginLogo} />
+        </div>
+        <h2 className={LoginStyle.title}>BIENVENIDO</h2>
+
+        <div className="form-floating mb-3 ">
+          <input type="email" className="form-control h-75 d-inline-block" id="floatingInput" placeholder="name@example.com" onChange={(e) => setEmail(e.target.value)}/>
+          <label for="floatingInput">Correo</label>
+          {errores.email && (<span className ={LoginStyle.error}>{errores.email}</span>)}
+        </div>
+        <div className="form-floating">
+          <input type="password" className="form-control" id="floatingPassword" placeholder="Contraseña" onChange={(e) => setContraseña(e.target.value)}/>
+          <label for="floatingPassword">Contraseña</label>
+          {errores.contraseña && <span className={LoginStyle.error}>{errores.contraseña}</span>}
+        </div>
+        <br/>
+        <button className={LoginStyle.button}>Iniciar sesion</button>
+        <div>
+          <p className={LoginStyle.texto}>¿No tienes cuenta?</p>
+          <a href="/signup" className={LoginStyle.a}>
+            Registrate
+          </a>
+        </div>
       </div>
     </div>
-  )
+    <Footer/>
+    </>
+    
+  );
 }
 
 export default Login;
