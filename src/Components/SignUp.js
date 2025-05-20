@@ -29,17 +29,6 @@ function Signup() {
             required
             />
 
-            <label>Número identificación</label>
-            <input type="number"
-            placeholder='Digite su numero de identificacion sin puntos' 
-            min={1}
-            maxLength={10}
-            minLength={7}
-            required
-            pattern="[0-9]+"
-            
-            />
-
             <label>Teléfono</label>
             <input type="number"
             placeholder='Digite su numero de telefono' 
@@ -47,6 +36,16 @@ function Signup() {
             maxLength={10}
             minLength={10}
             pattern='[0-9]+'
+            required
+            />
+
+            <label>Nombre de usuario</label>
+            <input type="text" 
+            placeholder='Digite su nombre de usuario'
+            maxLength={20}
+            minLength={3}
+            pattern="[A-Za-z]+"
+            title="El nombre solo puede contener letras"
             required
             />
 
