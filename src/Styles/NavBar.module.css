@@ -33,6 +33,12 @@ font-size: 3rem;
 color: white;
 font-weight: bold;
 font-family: sans-serif;
+transition: color 0.2s;
+}
+
+.title:hover {
+color: #b0aaaadd;
+cursor: pointer;
 }
 
 .hamburger {

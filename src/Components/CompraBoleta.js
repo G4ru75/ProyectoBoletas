@@ -1,3 +1,7 @@
+import Footer from "./Footer"
+import NavBar from "./navbar"
+import { useNavigate } from "react-router-dom"
+
 function CompraBoleta({ evento }) {
     const {
     nombre = "Evento de 2",
@@ -13,12 +17,20 @@ function CompraBoleta({ evento }) {
     estado = "NO se",
     } = evento || {}
 
+    const navigate = useNavigate();
+
+    const IrAEspecificacionCompra = () => {
+        navigate("/especificacionCompra");
+    }
+
 return (
+    <>
+    <NavBar/>
     <div className="container mx-auto p-4 max-w-6xl">
-     <div className="flex flex-col md:flex-row gap-4">
+        <div className="flex flex-col md:flex-row gap-4">
 
 
-     <div className="bg-gray-200 rounded-lg p-6 flex-1">
+        <div className="bg-gray-200 rounded-lg p-6 flex-1">
             <h2 className="text-xl font-bold text-center mb-6">INFORMACIÓN EVENTO</h2>
 
             <div className="space-y-6">
@@ -59,7 +71,7 @@ return (
             </div>
 
             <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-md focus:outline-none focus:shadow-outline transform transition-all hover:scale-105"
-            onClick={() => console.log("Comprar boleta para:", nombre)}>COMPRAR
+            onClick={IrAEspecificacionCompra}>COMPRAR
             </button>
         </div>
 
@@ -87,13 +99,15 @@ return (
             </div>
 
             <div className="mt-4">
-              <p className="font-semibold text-gray-800 text-center mb-2">Descripción del evento</p>
-              <p className="text-gray-700 text-sm">{descripcion}</p>
+                <p className="font-semibold text-gray-800 text-center mb-2">Descripción del evento</p>
+                <p className="text-gray-700 text-sm">{descripcion}</p>
             </div>
         </div>
 
     </div>
     </div>
+    <Footer/>
+    </>
     )
 }
 export default CompraBoleta

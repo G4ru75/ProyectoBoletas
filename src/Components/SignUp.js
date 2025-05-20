@@ -5,7 +5,6 @@ import Footer from './Footer';
 function Signup() {
   return (
     <>
-    <Navbar/>
       <div className={SignUpStyle.container}>
         <div className={SignUpStyle.formSection}>
           <h2>Registro de usuario</h2>
@@ -75,7 +74,6 @@ function Signup() {
               desde los conciertos más esperados hasta los partidos más intensos y los shows más espectaculares.</h2>        
         </div>
     </div>
-    <Footer/>
     </>
   );
 }
