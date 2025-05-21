@@ -70,3 +70,26 @@
 .textSection h2 {
     font-size: 1.8rem;
 }
+
+
+@media(max-width: 768px) {
+    .container {
+        flex-direction: column;
+        padding: 2rem;
+        gap: 0;
+    }
+
+
+}
+
+@media(max-width: 480px) {
+        .formSection {
+        width: 100%;
+        max-width: 100%;
+        padding: 2rem;
+    }
+
+    .textSection {
+        font-size: 1rem;
+    }
+}

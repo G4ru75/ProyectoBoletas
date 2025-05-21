@@ -57,7 +57,9 @@ function Evento({ eventoInicial, onAgregar, onModificar }) {
             <div className="border-b-4 border-blue-500 mb-6"></div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
                 <div className="mb-4" >
+
                     <label class="text-gray-700 text-sm font-bold mb-2">Nombre</label>
+
                     <input type="text" placeholder="Nombre" value={nombre} onChange={(e) => setNombre(e.target.value)}
                     className="border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500" required />
                 </div>
@@ -65,6 +67,7 @@ function Evento({ eventoInicial, onAgregar, onModificar }) {
                     <label  class="text-gray-700 text-sm font-bold mb-2">Precio</label>
                     <input type="number" placeholder="Precio" value={precio} onChange={(e) => setPrecio(e.target.value)} 
                     className="border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500" required/>
+
                 </div>
 
                 <div className="mb-4">
