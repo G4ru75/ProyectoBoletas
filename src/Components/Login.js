@@ -44,22 +44,25 @@ function Login() {
       })
 
       .then(async response => {
-        const data = await response.json();
-        if (!response.ok){
-          Swal.fire({
+        const mensaje = await response.text(); //Aqui se tiene que transformar a texto
+        if (!response.ok){                    //Porque los locos del back devuelven un texto plano 
+          Swal.fire({                         //el mensajito de credenciales incorrectas
             icon: 'error',
             title: 'Oops...',
-            text: 'Ah ocurrido un error',
+            text: mensaje,
           });
 
         } else {
-          Swal.fire({
+
+          let data = JSON.parse(mensaje); //Aqui se tiene que parsear a JSON porque los datos si lo mandan como JSON
+          console.log(data);        
+          Swal.fire({                     //Donde va el token y el user
             icon: 'success',
             title: 'Éxito',
             text: `Bienvenido usuario ${data.user.nombre} ${data.user.apellido}`,
           });
           console.log(data.token);
-          
+
           Cookies.set('token', data.token, {
             expires: 1,// La cookie expirará en 1 día
             secure: true, // Solo se enviará a través de HTTPS
