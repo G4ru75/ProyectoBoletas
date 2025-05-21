@@ -30,6 +30,7 @@ function Navbar() {
         <Link to="/informacion">Informacion</Link>
         <Link to="/informacion">Contacto</Link>
         <Link to="/login">Iniciar Sesion</Link>
+        <Link to="/signup">Registrarse</Link>
         </nav>
     </header>
     );

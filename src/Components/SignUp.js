@@ -2,7 +2,9 @@ import react, {useState, useEffect} from 'react';
 import SignUpStyle from '../Styles/SignUp.module.css';
 import Navbar from './navbar';
 import Footer from './Footer';
-import Swal from 'sweetalert2'; 
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
+import { Alert } from 'bootstrap/dist/js/bootstrap.bundle.min';
 
 function Signup() {
   const [nombre, setNombre] = useState('');
@@ -13,6 +15,7 @@ function Signup() {
   const [contraseña, setContraseña] = useState('');
   const [errores, setErrores] = useState({});
 
+  const navegar = useNavigate();
   useEffect(() => {
     const errores = {};
     
@@ -66,30 +69,31 @@ const handleSubmit = (e) => {
                 body: JSON.stringify(Usuario)
 
             }).then(async response => {
-  const message = await response.text(); // como desde la Api mandan el mensaje en texto plano
-  if (!response.ok) {                   // entonces esa linea lo cambia a tect en el front
-    Swal.fire({
-    icon: "error",
-    title: "Oops...",
-    text: message,
-    });
-  }else {
-    Swal.fire({
-    title: message,
-    icon: "success",
-    draggable: true
-  });
+          const mensaje = await response.text(); // como desde la Api mandan el mensaje en texto plano
+          if (!response.ok) {                   // entonces esa linea lo cambia a tect en el front
+            Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: mensaje, //Mensaje de error que el usuario ya existe, viene desde el backend
+            });
+          }else {
+            Swal.fire({
+            title: mensaje,
+            icon: "success", //Mensaje de registro exitoso
+            draggable: true
+          });
+          
+          
 
-  setApellido('');
-  setNombre('');
-  setTelefono('');
-  setNombreUsuario('');
-  setEmail('');
-  setContraseña('');
-
-  }
-
-  
+          setApellido('');
+          setNombre('');
+          setTelefono('');
+          setNombreUsuario(''); //Se limpian los campos de los inputs pe causa
+          setEmail('');
+          setContraseña('');
+          
+          navegar('/login'); //Ir a login si los datos son correctos
+          }
 })
     
     } else {
