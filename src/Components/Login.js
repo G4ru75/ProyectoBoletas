@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import {Link, useNavigate} from 'react-router-dom';
+import Cookies from 'js-cookie'; //Libreria para manejar cookies
 
 
 function Login() {
@@ -58,7 +59,12 @@ function Login() {
             text: `Bienvenido usuario ${data.user.nombre} ${data.user.apellido}`,
           });
           console.log(data.token);
-          localStorage.setItem("token", data.token); // Solo si no usas cookies HttpOnly
+          
+          Cookies.set('token', data.token, {
+            expires: 1,// La cookie expirará en 1 día
+            secure: true, // Solo se enviará a través de HTTPS
+            sameSite: 'Strict' // La cookie no se enviará con solicitudes de terceros
+          })
 
           setNombreUsuario('');
           setContraseña('');
