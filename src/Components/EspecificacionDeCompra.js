@@ -1,3 +1,6 @@
+import NavBar from './navbar';
+import Footer from './Footer';
+
 function EspecificacionDeCompra({ handleClose }) {
 
     const handleSubmit = (event) => {
@@ -8,6 +11,8 @@ function EspecificacionDeCompra({ handleClose }) {
 
 
 return (
+    <>
+    <NavBar />
     <form className="bg-gray-100 p-6 rounded-xl shadow-md w-full max-w-4xl mx-auto my-8"> 
     <div className="mb-4">
         <div className="relative">
@@ -79,6 +84,8 @@ return (
         </div>
         </div>
     </form>
+    <Footer />
+    </>
     );
     }
 

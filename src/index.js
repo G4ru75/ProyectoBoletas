@@ -5,19 +5,37 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Signup from './Components/SignUp';
 import Login from './Components/Login';
-
-import Evento from './Components/Evento';
-import EspecificacionDeCompra from './Components/EspecificacionDeCompra';
-import CompraBoleta from './Components/CompraBoleta';
 import BarraBusqueda from './Components/BarraBusqueda';
 import CartaEvento from './Components/CartaEvento';
+import Navbar from './Components/navbar';
 import Footer from './Components/Footer';
+import Informacion from './Components/Informacion';
+import ListaEventos from './Components/ListaEventos';
+import Evento from './Components/Evento';
+import EspecificacioDeCompra from './Components/EspecificacionDeCompra';
+import CompraBoleta from './Components/CompraBoleta';
+import PaginaPrincipal from './Components/PaginaPrincipal';
+import PaginaInformacion from './Components/PaginaInformacion';
+import PaginaLogin from './Components/PaginaLogin';
+import PaginaSignUp from './Components/PaginaSignUp';
+
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Evento/>
+    <BrowserRouter>
+      <Routes>
+          <Route path="/" element={<PaginaPrincipal />} />
+          <Route path="/signup" element={<PaginaSignUp />} />
+          <Route path="/login" element={<PaginaLogin />} />
+          <Route path="/informacion" element={<PaginaInformacion />} />
+          <Route path="/evento" element={<CompraBoleta />} />
+          <Route path="/especificacionCompra" element={<EspecificacioDeCompra />} />
+      </Routes>
+    </BrowserRouter>
 
   </React.StrictMode>
 );

@@ -1,9 +1,9 @@
 import react, {useState, useEffect} from 'react';
 import LoginStyle from '../Styles/Login.module.css';
-import Navbar from './navbar';
-import Footer from './Footer';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import {Link} from 'react-router-dom';
 
 
 function Login() {
@@ -28,7 +28,6 @@ function Login() {
 
   return (
     <>
-    <Navbar/>
     <div className={LoginStyle.container}>
       <div className={LoginStyle.loginBox}>
         <div className={LoginStyle.avatar}>
@@ -50,13 +49,10 @@ function Login() {
         <button className={LoginStyle.button}>Iniciar sesion</button>
         <div>
           <p className={LoginStyle.texto}>¿No tienes cuenta?</p>
-          <a href="/signup" className={LoginStyle.a}>
-            Registrate
-          </a>
+          <Link to="/signup" className={LoginStyle.a}>Registrate</Link>
         </div>
       </div>
     </div>
-    <Footer/>
     </>
     
   );

@@ -1,9 +1,15 @@
 import react from 'react'; 
 import cartaEventoStyle from '../Styles/CartaEvento.module.css';
 import {Calendar, Clock, MapPin, Timer} from "lucide-react";
+import { useNavigate } from 'react-router-dom';
 
 
-function cartaEvento(){
+function CartaEvento(){
+
+    const navigate = useNavigate();
+    const IrAEvento = () => {
+        navigate("/evento");
+    }
     return(
         <>
         <div className={cartaEventoStyle.tarjeta} style={{margin: "0 auto"}}>
@@ -50,10 +56,10 @@ function cartaEvento(){
             </div>
         </div>
 
-            <button className={cartaEventoStyle.boton}>Comprar</button>
+            <button className={cartaEventoStyle.boton} onClick={IrAEvento}>Comprar</button>
         </div>
     </>
     ); 
 }
 
-export default cartaEvento;
+export default CartaEvento;

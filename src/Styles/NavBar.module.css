@@ -2,7 +2,7 @@
 display: flex;
 align-items: center;
 justify-content: space-between;
-background-color: #2251a2;
+background-color: #356fd3;
 padding: 10px 30px;
 position: relative;
 flex-wrap: wrap;
@@ -16,7 +16,7 @@ flex-wrap: wrap;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #2251a2;
+    background-color: #356fd3;
 }
 
 .logoImg{
@@ -33,6 +33,12 @@ font-size: 3rem;
 color: white;
 font-weight: bold;
 font-family: sans-serif;
+transition: color 0.2s;
+}
+
+.title:hover {
+color: #b0aaaadd;
+cursor: pointer;
 }
 
 .hamburger {
@@ -57,7 +63,7 @@ flex-direction: column;
 position: static;
 top: 100%;
 right: 0;
-background-color: #2251a2;
+background-color: #356fd3;
 width: 100%;
 text-align: center;
 padding: 10px 0;
@@ -76,8 +82,8 @@ font-family: sans-serif;
 
 
 .menu a:hover {
-background-color: #306dde;
-border-radius: 40px;
+background-color: #5183df;
+border-radius: 12px;
 }
 
 .show {
@@ -95,19 +101,30 @@ display: flex;
 
     .title {
         font-size: 2.5rem;
+        margin-left: 15px;
     }
-
-    
 }
 
-@media(max-width: 520px) {
-    .logo {
+@media (max-width: 480px){
+    .logo{
+        width: 80px;
+        height: 80px;
+    }
+
+    .title{
+        font-size: 2rem;
+        margin-left: 5px;
+    }
+}
+
+@media (max-width: 320px){
+    .logo{
         width: 0px;
         height: 0px;
     }
 
-    .title {
-        font-size: 2rem;
-        margin-left: 0;
+    .title{
+        font-size: 1.5rem;
+        margin-left: 5px;
     }
 }

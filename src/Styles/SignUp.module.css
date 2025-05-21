@@ -37,6 +37,13 @@
     padding: 0.7rem;
     border-radius: 5px;
     border: 1px solid #ccc;
+
+}
+
+.form input:focus {
+    outline: none;
+    border: 1px solid rgb(12, 181, 12);
+    background-color: #ffffff;
 }
 
 .form button {
@@ -69,6 +76,15 @@
 
 .textSection h2 {
     font-size: 1.8rem;
+}
+
+.error {
+    color: red;
+    font-size: 0.8rem;
+    text-align: left;
+    margin-top: -0.5rem;
+    margin-bottom: 0.5rem;
+    font-family: sans-serif;
 }
 
 
