@@ -54,14 +54,12 @@ function Login() {
 
         } else {
 
-          let data = JSON.parse(mensaje); //Aqui se tiene que parsear a JSON porque los datos si lo mandan como JSON
-          console.log(data);        
+          let data = JSON.parse(mensaje); //Aqui se tiene que parsear a JSON porque los datos si lo mandan como JSON       
           Swal.fire({                     //Donde va el token y el user
             icon: 'success',
             title: 'Éxito',
             text: `Bienvenido usuario ${data.user.nombre} ${data.user.apellido}`,
           });
-          console.log(data.token);
 
           Cookies.set('token', data.token, {
             expires: 1,// La cookie expirará en 1 día
@@ -72,8 +70,9 @@ function Login() {
           setNombreUsuario('');
           setContraseña('');
 
-          navegar('/'); //Ir a principal si los datos son correctos
-
+          if(data.user.rol === 'Usuario'){
+            navegar('/'); //Ir a principal si los datos son correctos
+          }
         }
       });
   }else {
