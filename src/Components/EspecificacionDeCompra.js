@@ -25,10 +25,18 @@ return (
                 <input type="text" placeholder="Nombre" className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" required readOnly />
             </div>
                 
+
             <div className="mb-3">
                 <label className="block text-sm font-bold mb-1">CATEGORIA DE ENTRADA</label>
-                <input type="text" placeholder="Categoría" className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" required readOnly />
+                <select className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"required>
+                    <option value="vip">General</option>
+                    <option value="estandar">Estándar</option>
+                    <option value="premium">Premium</option>
+                    <option value="general">VIP</option>
+                </select>
             </div>
+
+
             <div className="mb-3">
                 <label className="block text-sm font-bold mb-1">PRECIO</label>
                 <input type="text" placeholder="Precio" className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" required readOnly />
@@ -46,20 +54,21 @@ return (
             <div className="md:col-span-2 mb-4">
                 <label className="block text-sm font-bold mb-1">SELECCIONA METODO DE PAGO</label>
                 <div className="space-y-2">
-                <div>
+
+                <div className="flex items-center">
                     <input className="h-4 w-4  border-gray-300 rounded" type="radio" name="metodoPago" id="tarjetaDebito" value="tarjetaDebito"
                     />
                     <label className="ml-2 block text-sm text-gray-700" htmlFor="tarjetaDebito">Tarjeta de debito</label>
                     </div>
 
-                    <div >
-                    <input className="h-4 w-4 border-gray-300 rounded" type="radio" name="metodoPago" id="tarjetaCredito" value="tarjetaCredito"
+                    <div className="flex items-center" >
+                    <input className="h-4 w-4  border-gray-300 rounded" type="radio" name="metodoPago" id="tarjetaCredito" value="tarjetaCredito"
                     />
                     <label className="ml-2 block text-sm text-gray-700" htmlFor="tarjetaCredito">Tarjeta de credito</label>
                     </div>
 
-                    <div>
-                    <input className="h-4 w-4 border-gray-300 rounded" type="radio" name="metodoPago" id="transferenciaPse"value="transferenciaPse"/>
+                    <div className="flex items-center">
+                    <input className="h-4 w-4  border-gray-300 rounded" type="radio" name="metodoPago" id="transferenciaPse"value="transferenciaPse"/>
                     <label className="ml-2 block text-sm text-gray-700" htmlFor="transferenciaPse">Transferencia por pse</label>
                     </div>
                 </div>
@@ -67,7 +76,7 @@ return (
             </div>
             <button 
                 type="submit" 
-                className="bg-green-500 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-md focus:outline-none focus:shadow-outline transform transition-all hover:scale-105"
+                className="bg-green-500 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-md focus:outline-none  transform transition-all hover:scale-105"
             >
                 COMPRAR
             </button>

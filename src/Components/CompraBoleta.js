@@ -70,6 +70,7 @@ return (
             </div>
             </div>
 
+
             <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-md focus:outline-none focus:shadow-outline transform transition-all hover:scale-105"
             onClick={IrAEspecificacionCompra}>COMPRAR
             </button>

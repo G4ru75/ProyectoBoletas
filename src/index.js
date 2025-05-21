@@ -22,6 +22,7 @@ import PaginaSignUp from './Components/PaginaSignUp';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
@@ -35,6 +36,7 @@ root.render(
           <Route path="/especificacionCompra" element={<EspecificacioDeCompra />} />
       </Routes>
     </BrowserRouter>
+
   </React.StrictMode>
 );
 
