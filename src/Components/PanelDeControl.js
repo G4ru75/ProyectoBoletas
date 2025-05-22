@@ -5,13 +5,19 @@ import Footer from "./Footer";
 import Evento from "./Evento";
 import AgregarCategoria from "./AgregarCategoria";
 import ListaCategorias from "./ListaCategoria";
-import EditarCategoria from "./EditarCategoria"; // Nuevo componente
+import EditarCategoria from "./EditarCategoria";
+import ListaEventosAdmin from "./ListaEventosAdmin";
 import {List, X} from "lucide-react";
 import Swal from "sweetalert2";
 import Cookies from "js-cookie";
+import EliminarEvento from "./EliminarEvento";
+import GenerarReporte from "./GenerarReportes";
 
 function PanelDeControl() {
     const [mostrarAgregarEvento, setMostrarAgregarEvento] = useState(false);
+    const [mostrarListaEventos, setMostrarListaEventos] = useState(false);
+    const [mostrarEliminarEvento, setMostrarEliminarEvento] = useState(false);
+
     const [mostrarAgregarCategoria, setMostrarAgregarCategoria] = useState(false);
     const [mostrarListaCategorias, setMostrarListaCategorias] = useState(false);
 
@@ -19,6 +25,8 @@ function PanelDeControl() {
     const [mostrarSeleccionarCategoria, setMostrarSeleccionarCategoria] = useState(false);
     const [modoSeleccionCategoria, setModoSeleccionCategoria] = useState(""); // "modificar" o "eliminar"
     const [categoriaSeleccionada, setCategoriaSeleccionada] = useState(null);
+
+    const [mostrarGenerarReporte, setMostrarGenerarReporte] = useState(false);
 
     const handleMostrarAgregarEvento = () =>{
         setMostrarAgregarEvento(true);
@@ -103,6 +111,15 @@ function PanelDeControl() {
         }
     };
 
+     // Funciones para modal reporte
+    const handleMostrarGenerarReporte = () => {
+        setMostrarGenerarReporte(true);
+    }
+
+    const handleCerrarGenerarReporte = () => {
+        setMostrarGenerarReporte(false);
+    }
+
     return (
         <>
         <NavbarAdmin />
@@ -114,9 +131,9 @@ function PanelDeControl() {
                 <h2 className={PanelDeControlStyles.subtitulo}>Eventos</h2>
                 <div className={PanelDeControlStyles.botonesContenedor}>
                 <button className={`${PanelDeControlStyles.boton} ${PanelDeControlStyles.botonAgregar}`} onClick={handleMostrarAgregarEvento}>Agregar</button>
-                <button className={`${PanelDeControlStyles.boton} ${PanelDeControlStyles.botonConsultar}`}>Consultar</button>
+                <button className={`${PanelDeControlStyles.boton} ${PanelDeControlStyles.botonConsultar}`} onClick={() => setMostrarListaEventos(true)}>Consultar</button>
                 <button className={`${PanelDeControlStyles.boton} ${PanelDeControlStyles.botonModificar}`}>Modificar</button>
-                <button className={`${PanelDeControlStyles.boton} ${PanelDeControlStyles.botonEliminar}`}>Eliminar</button>
+                <button className={`${PanelDeControlStyles.boton} ${PanelDeControlStyles.botonEliminar}`} onClick={()=> setMostrarEliminarEvento(true)}>Eliminar</button>
                 </div>
             </section>
 
@@ -133,7 +150,7 @@ function PanelDeControl() {
             <section className={PanelDeControlStyles.seccion}>
                 <h2 className={PanelDeControlStyles.subtitulo}>Reportes</h2>
                 <div className={PanelDeControlStyles.botonesContenedor}>
-                <button className={`${PanelDeControlStyles.boton} ${PanelDeControlStyles.botonAgregar}`}>Agregar</button>
+                <button className={`${PanelDeControlStyles.boton} ${PanelDeControlStyles.botonAgregar}`} onClick={handleMostrarGenerarReporte}>Agregar</button>
                 <button className={`${PanelDeControlStyles.boton} ${PanelDeControlStyles.botonConsultar}`}>Consultar</button>
                 <button className={`${PanelDeControlStyles.boton} ${PanelDeControlStyles.botonModificar}`}>Modificar</button>
                 <button className={`${PanelDeControlStyles.boton} ${PanelDeControlStyles.botonEliminar}`}>Eliminar</button>
@@ -152,6 +169,26 @@ function PanelDeControl() {
                 </div>
             </div>
         )}
+
+        {mostrarListaEventos && (
+            <div className={PanelDeControlStyles.modal}>
+                <div className={PanelDeControlStyles.modalContenido}>
+                <button onClick={() => setMostrarListaEventos(false)} className={PanelDeControlStyles.cerrarModal}><X size={30}/></button>
+                <ListaEventosAdmin onClose={() => setMostrarListaEventos(false)} />
+                </div>
+            </div>
+        )}
+
+        {mostrarEliminarEvento && (
+    <div className={PanelDeControlStyles.modal}>
+        <div className={PanelDeControlStyles.modalContenido}>
+            <EliminarEvento
+                onClose={() => setMostrarEliminarEvento(false)}
+                onEliminado={() => setMostrarEliminarEvento(false)} // puedes actualizar la lista global si usas contexto
+            />
+        </div>
+    </div>
+)}
 
         {mostrarAgregarCategoria && (
             <div className={PanelDeControlStyles.modal}>
@@ -210,6 +247,16 @@ function PanelDeControl() {
                 </div>
             </div>
         )}
+
+        {/* MODAL PARA Agregar informe*/}
+        {mostrarGenerarReporte && (
+                <div className={PanelDeControlStyles.modal}>
+                    <div className={PanelDeControlStyles.modalContenido}>
+                        <button onClick={handleCerrarGenerarReporte} className={PanelDeControlStyles.cerrarModal}><X size={30} /></button>
+                        <GenerarReporte onClose={handleCerrarGenerarReporte} />
+                    </div>
+                </div>
+            )}
         </>
     )
 }
