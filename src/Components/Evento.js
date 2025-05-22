@@ -91,6 +91,17 @@ function Evento({ eventoInicial, onAgregar, onModificar }) {
                         text: 'Evento agregada correctamente',
                     });
                     setNombre("");
+                    setPrecio("");
+                    setTipoBoleta("");
+                    setCategoriaSeleccionada("");
+                    setAforo("");
+                    setLugar("");
+                    setDireccion("");
+                    setFecha("");
+                    setHora("");
+                    setImagen("");
+                    setDescripcion("");
+                    
                 } else {
                     Swal.fire({
                         icon: 'error',
