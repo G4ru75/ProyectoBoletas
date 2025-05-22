@@ -8,6 +8,7 @@ function Evento({ eventoInicial, onAgregar, onModificar }) {
     const [precio, setPrecio] = useState('');
     const [tipoBoleta, setTipoBoleta] = useState('');
     const [categoria, setCategoria] = useState([]);
+    const [categoriaSeleccionada, setCategoriaSeleccionada] = useState('');
     const [aforo, setAforo] = useState('');
     const [lugar, setLugar] = useState('');
     const [direccion, setDireccion] = useState('');
@@ -66,7 +67,7 @@ function Evento({ eventoInicial, onAgregar, onModificar }) {
                 fecha: new Date(`${fecha}T${hora}`).toISOString(),
                 aforo_Max: Number(aforo),
                 precioTicket: Number(precio),
-                id_Categoria: Number(categoria),
+                id_Categoria: Number(categoriaSeleccionada),
 
             }
     
@@ -124,7 +125,7 @@ function Evento({ eventoInicial, onAgregar, onModificar }) {
 
                 <div className="mb-4">
                     <label className="text-gray-700 text-sm font-bold mb-2">Categoria</label>
-                    <select value={categoria} onChange={(e) => setCategoria(e.target.value)}
+                    <select value={categoriaSeleccionada} onChange={(e) => setCategoriaSeleccionada(e.target.value)}
                         className="border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500"required>
                         <option value="">Seleccione una categoria</option>
                         {categoria.map((cat) => (
