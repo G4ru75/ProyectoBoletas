@@ -1,0 +1,84 @@
+.centrar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+    background: #f9f9f9;
+}
+
+.formulario {
+    background: #fff;
+    padding: 2rem 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+    min-width: 320px;
+}
+
+.titulo {
+    margin-bottom: 1.5rem;
+    color: #2d3748;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.grupo {
+    margin-bottom: 1.2rem;
+}
+
+.etiqueta {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #4a5568;
+    font-weight: 500;
+}
+
+.entrada {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 1rem;
+    outline: none;
+    transition: border 0.2s;
+}
+
+.entrada:focus {
+    border-color: #3182ce;
+}
+
+.boton {
+    background: linear-gradient(90deg, #3182ce 0%, #63b3ed 100%);
+    color: #fff;
+    border: none;
+    padding: 0.6rem 1.5rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-right: 0.7rem;
+    box-shadow: 0 2px 8px rgba(49,130,206,0.08);
+    transition: background 0.2s, transform 0.1s;
+}
+
+.boton:hover {
+    background: linear-gradient(90deg, #2563eb 0%, #4299e1 100%);
+    transform: translateY(-2px) scale(1.04);
+}
+
+.botonCancelar {
+    background: #fff;
+    color: #e53e3e;
+    border: 1px solid #e53e3e;
+    padding: 0.6rem 1.5rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.2s, color 0.2s;
+}
+
+.botonCancelar:hover {
+    background: #e53e3e;
+    color: #fff;
+}

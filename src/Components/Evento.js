@@ -1,56 +1,108 @@
 import { Minimize } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
+import Cookies from 'js-cookie';
+import Swal from 'sweetalert2';
 
 function Evento({ eventoInicial, onAgregar, onModificar }) {
     const [nombre, setNombre] = useState('');
     const [precio, setPrecio] = useState('');
     const [tipoBoleta, setTipoBoleta] = useState('');
-    const [categoria, setCategoria] = useState('');
+    const [categoria, setCategoria] = useState([]);
+    const [categoriaSeleccionada, setCategoriaSeleccionada] = useState('');
     const [aforo, setAforo] = useState('');
     const [lugar, setLugar] = useState('');
+    const [direccion, setDireccion] = useState('');
     const [fecha, setFecha] = useState('');
     const [hora, setHora] = useState('');
     const [imagen, setImagen] = useState('');
     const [duracion, setDuracion] = useState('');
     const [descripcion, setDescripcion] = useState('');
-
-    useEffect(() => {
-        if (eventoInicial) {
-            setNombre(eventoInicial.nombre || '');
-            setPrecio(eventoInicial.precio || '');
-            setTipoBoleta(eventoInicial.tipoBoleta || '');
-            setCategoria(eventoInicial.categoria || '');
-            setAforo(eventoInicial.aforo || '');
-            setLugar(eventoInicial.lugar || '');
-            setFecha(eventoInicial.fecha || '');
-            setHora(eventoInicial.hora || '');
-            setImagen(eventoInicial.imagen || '');
-            setDuracion(eventoInicial.duracion || '');
-            setDescripcion(eventoInicial.descripcion || '');
-        }
-    }, [eventoInicial]);
     
+    useEffect(() => {
+        const token = Cookies.get('token');
+        fetch("https://localhost:7047/api/Categorias", {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                "Content-Type": "application/json"
+            }
+        })
+        .then(async response => {
+            const mensaje = await response.text(); // Leer como texto, igual que en Login.js
+            if (!response.ok) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: mensaje || 'No se pudieron obtener las categorías',
+                });
+                setCategoria([]);
+            } else {
+                let data = [];
+                try {
+                    data = JSON.parse(mensaje); // Parsear a JSON si es exitoso
+                } catch (e) {
+                    data = [];
+                }
+                setCategoria(data);
+            }
+            
+        })
+        .catch(() => {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Error de conexión con el servidor',
+            }); 
+        });
+    }, []);
+
     const handleSubmit = (e) => {
-        e.preventDefault();
-        const evento = {
-            nombre,
-            precio,
-            tipoBoleta,
-            categoria,
-            aforo,
-            lugar,
-            fecha,
-            hora,
-            imagen,
-            duracion,
-            descripcion,
-        };
-        if (eventoInicial) {
-            onModificar(eventoInicial.id, evento);
-        } else {
-            onAgregar(evento);
+            e.preventDefault();
+    
+            const Evento = {
+                nombre_Evento: nombre,
+                descripcion: descripcion,
+                nombre_Lugar: lugar,
+                direccion_Lugar: direccion,
+                fecha: new Date(`${fecha}T${hora}`).toISOString(),
+                aforo_Max: Number(aforo),
+                precioTicket: Number(precio),
+                id_Categoria: Number(categoriaSeleccionada),
+
+            }
+    
+            const token = Cookies.get('token'); 
+            console.log(token);
+            console.log(Evento);
+            
+            fetch("https://localhost:7047/api/Eventos", {
+                method: "POST",
+                headers: {
+                "Authorization": `Bearer ${token}`, //Token de autenticacion 
+                "Content-Type": "application/json"
+                },
+    
+                body: JSON.stringify(Evento)
+            }).then((response) => {
+                if (response.ok) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Éxito',
+                        text: 'Evento agregada correctamente',
+                    });
+                    setNombre("");
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'No se pudo agregar el evento',
+                    });
+                    console.log(response);
+                    console.log(Evento);
+                    console.log(token);
+                }
+            });
         }
-    };
     
     return (
         <form onSubmit={handleSubmit} className='bg-gray-100 p-6  rounded-xl  w-full max-w-4xl mx-auto my-8'>
@@ -66,29 +118,36 @@ function Evento({ eventoInicial, onAgregar, onModificar }) {
                 </div>
                 <div className="mb-4">
                     <label  class="text-gray-700 text-sm font-bold mb-2">Precio</label>
-                    <input type="number" placeholder="Precio" value={precio} onChange={(e) => setPrecio(e.target.value)} min={0} pattern='[0-9]+' 
+                    <input type="number" placeholder="Precio" value={precio} onChange={(e) => setPrecio(e.target.value)} min={1} pattern='[0-9]+' 
                     className="border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500" required/>
 
                 </div>
 
                 <div className="mb-4">
                     <label className="text-gray-700 text-sm font-bold mb-2">Categoria</label>
-                    <select value={categoria} onChange={(e) => setCategoria(e.target.value)}
+                    <select value={categoriaSeleccionada} onChange={(e) => setCategoriaSeleccionada(e.target.value)}
                         className="border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500"required>
-                        <option value="concierto">Concierto</option>
-                        <option value="deporte">Deporte</option>
-                        <option value="teatro">Teatro</option>
+                        <option value="">Seleccione una categoria</option>
+                        {categoria.map((cat) => (
+                            <option key={cat.id_Categoria} value={cat.id_Categoria}>{cat.nombre}</option>
+                        ))}
                     </select>
                 </div>
     
                 <div className="mb-4">
                     <label  className="text-gray-700 text-sm font-bold mb-2">Aforo</label>
-                    <input type="text" placeholder="Aforo" value={aforo} onChange={(e) => setAforo(e.target.value)} 
+                    <input type="text" placeholder="Aforo" value={aforo} onChange={(e) => setAforo(e.target.value)} min={1} pattern='[0-9]+'
                     className=" border rounded-md w-full py-2 px-3 text-gray-700  focus:outline-none focus:ring-2 focus:ring-blue-500" required/>
                 </div>
                 <div className="mb-4">
                     <label className=" text-gray-700 text-sm font-bold mb-2">Lugar</label>
-                    <input type="text" placeholder="Lugar" value={lugar} onChange={(e) => setLugar(e.target.value)}
+                    <input type="text" placeholder="Nombre del lugar" value={lugar} onChange={(e) => setLugar(e.target.value)}
+                    className=" border rounded-md w-full py-2 px-3 text-gray-700  focus:outline-none focus:ring-2 focus:ring-blue-500" required/>
+                </div>
+
+                <div className="mb-4">
+                    <label className=" text-gray-700 text-sm font-bold mb-2">Direccion</label>
+                    <input type="text" placeholder="Direccion" value={direccion} onChange={(e) => setDireccion(e.target.value)}
                     className=" border rounded-md w-full py-2 px-3 text-gray-700  focus:outline-none focus:ring-2 focus:ring-blue-500" required/>
                 </div>
     
@@ -106,11 +165,6 @@ function Evento({ eventoInicial, onAgregar, onModificar }) {
                 <div className="mb-4">
                     <label className="text-gray-700 text-sm font-bold mb-2">Imagen</label>
                     <input type="file" accept="image/*" onChange={(e) => setImagen(e.target.value)} 
-                    className=" border rounded-md w-full py-2 px-3 text-gray-700  focus:outline-none focus:ring-2 focus:ring-blue-500" required/>
-                </div>
-                <div className="mb-4">
-                    <label className="text-gray-700 text-sm font-bold mb-2">Duracion</label>
-                    <input type="text" placeholder="Duracion" value={duracion} onChange={(e) => setDuracion(e.target.value)} 
                     className=" border rounded-md w-full py-2 px-3 text-gray-700  focus:outline-none focus:ring-2 focus:ring-blue-500" required/>
                 </div>
     
