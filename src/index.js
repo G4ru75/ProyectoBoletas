@@ -20,7 +20,7 @@ import PaginaLogin from './Components/PaginaLogin';
 import PaginaSignUp from './Components/PaginaSignUp';
 import GenerarReporte from './Components/GenerarReportes';
 import PanelDeControl from './Components/PanelDeControl';
-
+import AgregarCategoria from './Components/AgregarCategoria';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 
