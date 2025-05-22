@@ -5,14 +5,20 @@ import Footer from "./Footer";
 import Evento from "./Evento";
 import AgregarCategoria from "./AgregarCategoria";
 import ListaCategorias from "./ListaCategoria";
-import {List, X} from "lucide-react";;
+import {List, X} from "lucide-react";
+import GenerarReporte from "./GenerarReportes";
 
 
 function PanelDeControl() {
-
+    // Eventos
     const [mostrarAgregarEvento, setMostrarAgregarEvento] = useState(false);
+    // Categorias
     const [mostrarAgregarCategoria, setMostrarAgregarCategoria] = useState(false);
     const [mostrarListaCategorias, setMostrarListaCategorias] = useState(false);
+                
+    // Reportes
+    const [mostrarAgregarReporte, setMostrarAgregarReporte] = useState(false);
+
 
     const handleMostrarAgregarEvento = () =>{
         setMostrarAgregarEvento(true);
@@ -49,6 +55,15 @@ function PanelDeControl() {
         setMostrarListaCategorias(false);
     }
 
+    const handleMostrarAgregarReporte = () => {
+        setMostrarAgregarReporte(true);
+    }
+
+    const handleCerrarAgregarReporte = () => {  
+        setMostrarAgregarReporte(false);
+    }
+
+
 
     return (
         <>
@@ -80,7 +95,7 @@ function PanelDeControl() {
             <section className={PanelDeControlStyles.seccion}>
                 <h2 className={PanelDeControlStyles.subtitulo}>Reportes</h2>
                 <div className={PanelDeControlStyles.botonesContenedor}>
-                <button className={`${PanelDeControlStyles.boton} ${PanelDeControlStyles.botonAgregar}`}>Agregar</button>
+                <button className={`${PanelDeControlStyles.boton} ${PanelDeControlStyles.botonAgregar}`} onClick={handleMostrarAgregarReporte}>Agregar</button>
                 <button className={`${PanelDeControlStyles.boton} ${PanelDeControlStyles.botonConsultar}`}>Consultar</button>
                 <button className={`${PanelDeControlStyles.boton} ${PanelDeControlStyles.botonModificar}`}>Modificar</button>
                 <button className={`${PanelDeControlStyles.boton} ${PanelDeControlStyles.botonEliminar}`}>Eliminar</button>
@@ -118,6 +133,16 @@ function PanelDeControl() {
                     <ListaCategorias onClose={() => setMostrarListaCategorias(false)}/>
                 </div>
         </div>
+        )}
+
+        /*Reportes*/
+        {mostrarAgregarReporte && (
+            <div className={PanelDeControlStyles.modal}>
+                <div className={PanelDeControlStyles.modalContenido}>
+                    <button onClick={handleCerrarAgregarReporte} className={PanelDeControlStyles.cerrarModal}><X size={30}/></button>
+                    <GenerarReporte onClose={() => setMostrarAgregarReporte(false)}/>
+                </div>
+            </div>
         )}
 
         </>

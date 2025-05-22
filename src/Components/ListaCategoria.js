@@ -7,7 +7,7 @@ function ListaCategorias({ onClose }) {
     const [categorias, setCategorias] = useState([]);
     const [loading, setLoading] = useState(true);
 
-useEffect(() => {
+    useEffect(() => {
     const token = Cookies.get('token');
     fetch("https://localhost:7047/api/Categorias", {
         method: "GET",
