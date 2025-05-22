@@ -1,0 +1,29 @@
+.infoMain {
+    min-height: 80vh;
+    width: 100%;
+    background: #f9f9f9;
+    padding: 3rem 0;
+}
+
+.infoSection {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.infoTitle {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: #2979ff;
+}
+
+.infoText {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: #222;
+}
+
+.infoContact {
+    margin-top: 2rem;
+    font-size: 1.1rem;
+}
