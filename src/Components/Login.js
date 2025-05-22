@@ -55,11 +55,6 @@ function Login() {
         } else {
 
           let data = JSON.parse(mensaje); //Aqui se tiene que parsear a JSON porque los datos si lo mandan como JSON       
-          Swal.fire({                     //Donde va el token y el user
-            icon: 'success',
-            title: 'Éxito',
-            text: `Bienvenido usuario ${data.user.nombre} ${data.user.apellido}`,
-          });
 
           Cookies.set('token', data.token, {
             expires: 1,// La cookie expirará en 1 día
@@ -71,9 +66,19 @@ function Login() {
           setContraseña('');
 
           if(data.user.rol === 'Usuario'){
+            Swal.fire({                     //Donde va el token y el user
+            icon: 'success',
+            title: 'Éxito',
+            text: `Bienvenido usuario ${data.user.nombre} ${data.user.apellido}`,
+          });
             navegar('/'); //Ir a principal si los datos si el usuario es usuario jsndajsddfsdj
           }else if(data.user.rol === 'Admin'){
-            navegar('/panelDeControl'); //Ir a panel de control si el usuario es admin
+            Swal.fire({                     //Donde va el token y el user
+            icon: 'success',
+            title: 'Éxito',
+            text: `Bienvenido admin ${data.user.nombre} ${data.user.apellido}`,
+          });
+            navegar('/paginaAdmin'); //Ir a panel de control si el usuario es admin
           }
         }
       });

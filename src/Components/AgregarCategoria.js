@@ -5,9 +5,14 @@ import Swal from "sweetalert2";
 function AgregarCategoria({ onAgregar }) {
     
     const [nombre, setNombre] = useState("");
-    const [id_Categoria, SetId_Categoria] = useState("");
 
     const handleSubmit = (e) => {
+        e.preventDefault();
+
+        const Categoria = {
+            nombre: nombre
+        }
+
         const token = Cookies.get('token'); 
 
         fetch("https://localhost:7047/api/Categorias", {
@@ -17,7 +22,7 @@ function AgregarCategoria({ onAgregar }) {
             "Content-Type": "application/json"
             },
 
-            body: JSON.stringify({id_Categoria, nombre})
+            body: JSON.stringify(Categoria)
         }).then((response) => {
             if (response.ok) {
                 Swal.fire({
@@ -25,7 +30,7 @@ function AgregarCategoria({ onAgregar }) {
                     title: 'Éxito',
                     text: 'Categoría agregada correctamente',
                 });
-                onAgregar();
+                setNombre("");
             } else {
                 Swal.fire({
                     icon: 'error',
@@ -41,24 +46,6 @@ function AgregarCategoria({ onAgregar }) {
 
             <form className={AgregarCategoriaStyle.formulario} onSubmit={handleSubmit}>
             <h2 className={AgregarCategoriaStyle.titulo}>Agregar Categoría de Evento</h2>
-
-            
-            <div className={AgregarCategoriaStyle.grupo}>
-                <label htmlFor="nombre" className={AgregarCategoriaStyle.etiqueta}>ID </label>
-                <input
-                id="ID"
-                type="number"
-                className={AgregarCategoriaStyle.entrada}
-                value={id_Categoria}
-                onChange={(e) => SetId_Categoria(e.target.value)}
-                required
-                pattern="[0-9]+"
-                title="El ID solo puede contener números"
-                minLength={1}
-                maxLength={10}
-                min={1}
-                />
-            </div>
 
             <div className={AgregarCategoriaStyle.grupo}>
                 <label htmlFor="nombre" className={AgregarCategoriaStyle.etiqueta}>Nombre </label>
