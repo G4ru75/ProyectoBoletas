@@ -31,6 +31,7 @@ root.render(
     <BrowserRouter>
       <Routes>
           <Route path="/" element={<PaginaPrincipal />} />
+          <Route path="/paginaAdmin" element={<PanelDeControl />} />
           <Route path="/signup" element={<PaginaSignUp />} />
           <Route path="/login" element={<PaginaLogin />} />
           <Route path="/informacion" element={<PaginaInformacion />} />
