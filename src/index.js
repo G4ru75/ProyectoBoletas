@@ -18,7 +18,9 @@ import PaginaPrincipal from './Components/PaginaPrincipal';
 import PaginaInformacion from './Components/PaginaInformacion';
 import PaginaLogin from './Components/PaginaLogin';
 import PaginaSignUp from './Components/PaginaSignUp';
-
+import GenerarReporte from './Components/GenerarReportes';
+import PanelDeControl from './Components/PanelDeControl';
+import AgregarCategoria from './Components/AgregarCategoria';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 
@@ -29,6 +31,7 @@ root.render(
     <BrowserRouter>
       <Routes>
           <Route path="/" element={<PaginaPrincipal />} />
+          <Route path="/paginaAdmin" element={<PanelDeControl />} />
           <Route path="/signup" element={<PaginaSignUp />} />
           <Route path="/login" element={<PaginaLogin />} />
           <Route path="/informacion" element={<PaginaInformacion />} />

@@ -1,0 +1,127 @@
+.centrarContenedor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 100px 20px;
+    box-sizing: border-box;
+}
+
+.contenedor {
+    background-color: #e0e0e0;
+    border-radius: 8px;
+    padding: 70px;
+    max-width: 100%;
+    margin: auto; 
+    font-family: Arial, sans-serif;
+    box-shadow: 14px 14px 10px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+}
+
+
+.titulo {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.seccion {
+    margin-bottom: 20px;
+}
+
+.subtitulo {
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-family: sans-serif;
+}
+
+.botonesContenedor {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.boton {
+    padding: 15px 25px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    min-width: 100px;
+}
+
+.boton:hover {
+    opacity: 0.8;
+}
+
+.botonAgregar {
+    background-color: #4cff4c; 
+}
+
+.botonConsultar {
+    background-color: #4c8cff; 
+}
+
+.botonModificar {
+    background-color: #ffff4c; 
+}
+
+.botonEliminar {
+    background-color: #ff5c4c; 
+    color: white;
+}
+
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modalContenido {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    width: 90%;
+    max-width: 900px;
+    position: relative;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    overflow-y: auto;
+    max-height: 90vh;
+}
+
+.cerrarModal {
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+    font-size: 2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #333;
+}
+
+
+/* Estilos responsivos */
+@media (max-width: 700px) {
+    .botonesContenedor {
+        flex-direction: column;
+    }
+
+    .contenedor {
+        padding: 50px 20px;
+        width: 70%;
+    }
+
+    .boton {
+        width: 100%;
+    }
+}
