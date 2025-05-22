@@ -71,7 +71,9 @@ function Login() {
           setContraseña('');
 
           if(data.user.rol === 'Usuario'){
-            navegar('/'); //Ir a principal si los datos son correctos
+            navegar('/'); //Ir a principal si los datos si el usuario es usuario jsndajsddfsdj
+          }else if(data.user.rol === 'Admin'){
+            navegar('/panelDeControl'); //Ir a panel de control si el usuario es admin
           }
         }
       });
