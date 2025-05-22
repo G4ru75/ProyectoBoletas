@@ -5,20 +5,20 @@ import Footer from "./Footer";
 import Evento from "./Evento";
 import AgregarCategoria from "./AgregarCategoria";
 import ListaCategorias from "./ListaCategoria";
+import EditarCategoria from "./EditarCategoria"; // Nuevo componente
 import {List, X} from "lucide-react";
-import GenerarReporte from "./GenerarReportes";
-
+import Swal from "sweetalert2";
+import Cookies from "js-cookie";
 
 function PanelDeControl() {
-    // Eventos
     const [mostrarAgregarEvento, setMostrarAgregarEvento] = useState(false);
-    // Categorias
     const [mostrarAgregarCategoria, setMostrarAgregarCategoria] = useState(false);
     const [mostrarListaCategorias, setMostrarListaCategorias] = useState(false);
-                
-    // Reportes
-    const [mostrarAgregarReporte, setMostrarAgregarReporte] = useState(false);
 
+    // NUEVOS ESTADOS
+    const [mostrarSeleccionarCategoria, setMostrarSeleccionarCategoria] = useState(false);
+    const [modoSeleccionCategoria, setModoSeleccionCategoria] = useState(""); // "modificar" o "eliminar"
+    const [categoriaSeleccionada, setCategoriaSeleccionada] = useState(null);
 
     const handleMostrarAgregarEvento = () =>{
         setMostrarAgregarEvento(true);
@@ -55,15 +55,53 @@ function PanelDeControl() {
         setMostrarListaCategorias(false);
     }
 
-    const handleMostrarAgregarReporte = () => {
-        setMostrarAgregarReporte(true);
-    }
+    // NUEVAS FUNCIONES PARA MODIFICAR Y ELIMINAR
+    const handleModificarCategoria = () => {
+        setModoSeleccionCategoria("modificar");
+        setMostrarSeleccionarCategoria(true);
+    };
 
-    const handleCerrarAgregarReporte = () => {  
-        setMostrarAgregarReporte(false);
-    }
+    const handleEliminarCategoria = () => {
+        setModoSeleccionCategoria("eliminar");
+        setMostrarSeleccionarCategoria(true);
+    };
 
+    // Cuando seleccionas una categoría de la lista
+    const handleSeleccionarCategoria = (cat) => {
+        setCategoriaSeleccionada(cat);
+        setMostrarSeleccionarCategoria(false);
+    };
 
+    // Cuando se termina de editar o eliminar
+    const handleCerrarEdicion = () => {
+        setCategoriaSeleccionada(null);
+        setModoSeleccionCategoria("");
+        setMostrarListaCategorias(false);
+        setTimeout(() => setMostrarListaCategorias(true), 500); // Refresca la lista
+    };
+
+    // Eliminar categoría
+    const handleConfirmarEliminar = async () => {
+        if (!categoriaSeleccionada) return;
+        const token = Cookies.get('token');
+        try {
+            const response = await fetch(`https://localhost:7047/api/Categorias/${categoriaSeleccionada.id_Categoria}`, {
+                method: "DELETE",
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                }
+            });
+            if (response.ok) {
+                Swal.fire('Eliminada', 'Categoría eliminada correctamente', 'success');
+                handleCerrarEdicion();
+            } else {
+                Swal.fire('Error', 'No se pudo eliminar la categoría', 'error');
+            }
+        } catch (error) {
+            Swal.fire('Error', 'No se pudo eliminar la categoría', 'error');
+        }
+    };
 
     return (
         <>
@@ -87,15 +125,15 @@ function PanelDeControl() {
                 <div className={PanelDeControlStyles.botonesContenedor}>
                 <button className={`${PanelDeControlStyles.boton} ${PanelDeControlStyles.botonAgregar}`} onClick={handleMostrarAgregarCategorias}>Agregar</button>
                 <button className={`${PanelDeControlStyles.boton} ${PanelDeControlStyles.botonConsultar}`} onClick={handleMostrarListaCategorias}>Consultar</button>
-                <button className={`${PanelDeControlStyles.boton} ${PanelDeControlStyles.botonModificar}`}>Modificar</button>
-                <button className={`${PanelDeControlStyles.boton} ${PanelDeControlStyles.botonEliminar}`}>Eliminar</button>
+                <button className={`${PanelDeControlStyles.boton} ${PanelDeControlStyles.botonModificar}`} onClick={handleModificarCategoria}>Modificar</button>
+                <button className={`${PanelDeControlStyles.boton} ${PanelDeControlStyles.botonEliminar}`} onClick={handleEliminarCategoria}>Eliminar</button>
                 </div>
             </section>
 
             <section className={PanelDeControlStyles.seccion}>
                 <h2 className={PanelDeControlStyles.subtitulo}>Reportes</h2>
                 <div className={PanelDeControlStyles.botonesContenedor}>
-                <button className={`${PanelDeControlStyles.boton} ${PanelDeControlStyles.botonAgregar}`} onClick={handleMostrarAgregarReporte}>Agregar</button>
+                <button className={`${PanelDeControlStyles.boton} ${PanelDeControlStyles.botonAgregar}`}>Agregar</button>
                 <button className={`${PanelDeControlStyles.boton} ${PanelDeControlStyles.botonConsultar}`}>Consultar</button>
                 <button className={`${PanelDeControlStyles.boton} ${PanelDeControlStyles.botonModificar}`}>Modificar</button>
                 <button className={`${PanelDeControlStyles.boton} ${PanelDeControlStyles.botonEliminar}`}>Eliminar</button>
@@ -105,14 +143,12 @@ function PanelDeControl() {
         </div>
         <Footer />
 
-        //Modales pe
-
+        {/* Modales */}
         {mostrarAgregarEvento && (
             <div className={PanelDeControlStyles.modal}>
                 <div className={PanelDeControlStyles.modalContenido}>
                     <button onClick={handleCerrarAgregarEvento} className={PanelDeControlStyles.cerrarModal}><X size={50}/></button>
                     <Evento onAgregar={handleAgregarEvento}/>
-
                 </div>
             </div>
         )}
@@ -132,19 +168,48 @@ function PanelDeControl() {
                     <button onClick={() => setMostrarListaCategorias(false)} className={PanelDeControlStyles.cerrarModal}><X size={30}/></button>
                     <ListaCategorias onClose={() => setMostrarListaCategorias(false)}/>
                 </div>
-        </div>
+            </div>
         )}
 
-        /*Reportes*/
-        {mostrarAgregarReporte && (
+        {/* MODAL PARA SELECCIONAR CATEGORÍA */}
+        {mostrarSeleccionarCategoria && (
             <div className={PanelDeControlStyles.modal}>
                 <div className={PanelDeControlStyles.modalContenido}>
-                    <button onClick={handleCerrarAgregarReporte} className={PanelDeControlStyles.cerrarModal}><X size={30}/></button>
-                    <GenerarReporte onClose={() => setMostrarAgregarReporte(false)}/>
+                    <button onClick={() => setMostrarSeleccionarCategoria(false)} className={PanelDeControlStyles.cerrarModal}><X size={30}/></button>
+                    <ListaCategorias
+                        modoSeleccion
+                        onSeleccionarCategoria={handleSeleccionarCategoria}
+                        onClose={() => setMostrarSeleccionarCategoria(false)}
+                    />
                 </div>
             </div>
         )}
 
+        {/* MODAL PARA EDITAR CATEGORÍA */}
+        {categoriaSeleccionada && modoSeleccionCategoria === "modificar" && (
+            <div className={PanelDeControlStyles.modal}>
+                <div className={PanelDeControlStyles.modalContenido}>
+                    <button onClick={handleCerrarEdicion} className={PanelDeControlStyles.cerrarModal}><X size={30}/></button>
+                    <EditarCategoria
+                        categoria={categoriaSeleccionada}
+                        onClose={handleCerrarEdicion}
+                        onActualizada={handleCerrarEdicion}
+                    />
+                </div>
+            </div>
+        )}
+
+        {/* MODAL PARA CONFIRMAR ELIMINACIÓN */}
+        {categoriaSeleccionada && modoSeleccionCategoria === "eliminar" && (
+            <div className={PanelDeControlStyles.modal}>
+                <div className={PanelDeControlStyles.modalContenido}>
+                    <button onClick={handleCerrarEdicion} className={PanelDeControlStyles.cerrarModal}><X size={30}/></button>
+                    <p>¿Seguro que deseas eliminar la categoría <b>{categoriaSeleccionada.nombre}</b>?</p>
+                    <button style={{ color: "red", marginRight: 10 }} onClick={handleConfirmarEliminar}>Eliminar</button>
+                    <button onClick={handleCerrarEdicion}>Cancelar</button>
+                </div>
+            </div>
+        )}
         </>
     )
 }
