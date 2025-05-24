@@ -5,10 +5,13 @@ import Footer from "./Footer";
 import Evento from "./Evento";
 import AgregarCategoria from "./AgregarCategoria";
 import ListaCategorias from "./ListaCategoria";
-import EditarCategoria from "./EditarCategoria"; // Nuevo componente
+import EditarCategoria from "./EditarCategoria";
+import ListaEventosAdmin from "./ListaEventosAdmin";
 import {List, X} from "lucide-react";
 import Swal from "sweetalert2";
 import Cookies from "js-cookie";
+import EliminarEvento from "./EliminarEvento";
+import GenerarReporte from "./GenerarReportes";
 
 
 const STYLES = {
@@ -39,6 +42,9 @@ const BOTONES = {
 
 function PanelDeControl() {
     const [mostrarAgregarEvento, setMostrarAgregarEvento] = useState(false);
+    const [mostrarListaEventos, setMostrarListaEventos] = useState(false);
+    const [mostrarEliminarEvento, setMostrarEliminarEvento] = useState(false);
+
     const [mostrarAgregarCategoria, setMostrarAgregarCategoria] = useState(false);
     const [mostrarListaCategorias, setMostrarListaCategorias] = useState(false);
 
@@ -46,6 +52,8 @@ function PanelDeControl() {
     const [mostrarSeleccionarCategoria, setMostrarSeleccionarCategoria] = useState(false);
     const [modoSeleccionCategoria, setModoSeleccionCategoria] = useState(""); // "modificar" o "eliminar"
     const [categoriaSeleccionada, setCategoriaSeleccionada] = useState(null);
+
+    const [mostrarGenerarReporte, setMostrarGenerarReporte] = useState(false);
 
     const handleMostrarAgregarEvento = () =>{
         setMostrarAgregarEvento(true);
@@ -130,11 +138,19 @@ function PanelDeControl() {
         }
     };
 
+     // Funciones para modal reporte
+    const handleMostrarGenerarReporte = () => {
+        setMostrarGenerarReporte(true);
+    }
 
+    const handleCerrarGenerarReporte = () => {
+        setMostrarGenerarReporte(false);
+    }
 
     return (
         <>
         <NavbarAdmin />
+
         <div className={STYLES.centrarContenedor}>
         <div className={STYLES.contenedor}>
         <h1 className={STYLES.titulo}>Panel de control</h1>
@@ -144,9 +160,9 @@ function PanelDeControl() {
             <p className={STYLES.descripcionSeccion}>Gestiona todos los eventos del sistema</p>
             <div className={STYLES.botonesContenedor}>
             <button className={BOTONES.agregar} onClick={handleMostrarAgregarEvento}>Agregar</button>
-            <button className={BOTONES.consultar}>Consultar</button>
+            <button className={BOTONES.consultar} onClick={() => setMostrarListaEventos(true)}>Consultar</button>
             <button className={BOTONES.modificar}>Modificar</button>
-            <button className={BOTONES.eliminar}>Eliminar</button>
+            <button className={BOTONES.eliminar}  onClick={()=> setMostrarEliminarEvento(true)}>Eliminar</button>
             </div>
         </section>
 
@@ -159,16 +175,18 @@ function PanelDeControl() {
             <button className={BOTONES.modificar} onClick={handleModificarCategoria}>Modificar</button>
             <button className={BOTONES.eliminar} onClick={handleEliminarCategoria}>Eliminar</button>
             </div>
+
         </section>
 
         <section className={STYLES.seccion}>
             <h2 className={STYLES.subtituloSeccion}>Reportes</h2>
             <p className={STYLES.descripcionSeccion}>Genera reportes de los eventos</p>
             <div className={STYLES.botonesContenedor}>
-            <button className={BOTONES.agregar}>Agregar</button>
+            <button className={BOTONES.agregar} onClick={handleMostrarGenerarReporte}>Agregar</button>
             <button className={BOTONES.consultar}>Consultar</button>
             <button className={BOTONES.modificar}>Modificar</button>
             <button className={BOTONES.eliminar}>Eliminar</button>
+
             </div>
         </section>
         </div>
@@ -246,6 +264,16 @@ function PanelDeControl() {
           </div>
         </div>
         )}
+
+        {/* MODAL PARA Agregar informe*/}
+        {mostrarGenerarReporte && (
+                <div className={PanelDeControlStyles.modal}>
+                    <div className={PanelDeControlStyles.modalContenido}>
+                        <button onClick={handleCerrarGenerarReporte} className={PanelDeControlStyles.cerrarModal}><X size={30} /></button>
+                        <GenerarReporte onClose={handleCerrarGenerarReporte} />
+                    </div>
+                </div>
+            )}
         </>
     )
 }

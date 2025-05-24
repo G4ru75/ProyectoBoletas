@@ -30,7 +30,8 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-          <Route path="/" element={<PanelDeControl />} />
+          <Route path="/" element={<PaginaLogin />} />
+          <Route path="/PaginaPrincipal" element={<PaginaPrincipal />} />
           <Route path="/paginaAdmin" element={<PanelDeControl />} />
           <Route path="/signup" element={<PaginaSignUp />} />
           <Route path="/login" element={<PaginaLogin />} />

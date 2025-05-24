@@ -71,7 +71,7 @@ function Login() {
             title: 'Éxito',
             text: `Bienvenido usuario ${data.user.nombre} ${data.user.apellido}`,
           });
-            navegar('/'); //Ir a principal si los datos si el usuario es usuario jsndajsddfsdj
+            navegar('/PaginaPrincipal'); //Ir a principal si los datos si el usuario es usuario jsndajsddfsdj
           }else if(data.user.rol === 'Admin'){
             Swal.fire({                     //Donde va el token y el user
             icon: 'success',

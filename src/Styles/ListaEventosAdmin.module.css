@@ -1,0 +1,58 @@
+/* src/Styles/ListaEventosAdmin.module.css */
+.contenedor {
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.titulo {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.mensaje {
+    text-align: center;
+    font-style: italic;
+    color: #555;
+}
+
+.tablaContenedor {
+    overflow-x: auto;
+}
+
+.tabla {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabla th, .tabla td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.tabla th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+.botonCerrar {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    transition: background-color 0.3s ease;
+}
+
+.botonCerrar:hover {
+    background-color: #c0392b;
+}
