@@ -203,6 +203,25 @@ function PanelDeControl() {
         </div>
     )}
 
+
+    {mostrarListaEventos && (
+      <div className={STYLES.modal}>
+        <div className={STYLES.modalContenido}>
+          <button onClick={() => setMostrarListaEventos(false)} className={STYLES.cerrarModal}><X size={30} /></button>
+          <ListaEventosAdmin onClose={() => setMostrarListaEventos(false)} />
+        </div>
+      </div>
+    )}
+
+    {mostrarEliminarEvento && (
+      <div className={STYLES.modal}>
+        <div className={STYLES.modalContenido}>
+          <button onClick={() => setMostrarEliminarEvento(false)} className={STYLES.cerrarModal}><X size={30} /></button>
+          <EliminarEvento onClose={() => setMostrarEliminarEvento(false)} />
+        </div>
+      </div>
+    )}
+
     {mostrarAgregarCategoria && (
         <div className={STYLES.modal}>
           <div className={STYLES.modalContenido}>
