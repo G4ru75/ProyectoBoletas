@@ -13,6 +13,33 @@ import Cookies from "js-cookie";
 import EliminarEvento from "./EliminarEvento";
 import GenerarReporte from "./GenerarReportes";
 
+
+const STYLES = {
+
+  centrarContenedor: "min-h-screen bg-slate-100 py-12 px-4",
+  contenedor: "max-w-7xl mx-auto",
+
+
+  titulo: "text-center mb-12 text-4xl font-bold text-slate-800",
+
+  seccion:
+    "bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 p-8 border mb-6",
+  subtituloSeccion: "text-center mb-6 text-2xl font-bold text-slate-800",
+  descripcionSeccion: "text-center mb-6 text-sm text-slate-600",
+  botonesContenedor: "grid grid-cols-2 md:grid-cols-4 gap-3",
+
+  modal: "fixed top-0 left-0 w-screen h-screen flex items-center justify-center",
+  modalContenido: "bg-white p-8 max-w-4xl relative overflow-y-auto max-h-[90vh]",
+  cerrarModal:"absolute top-2 right-4 text-2xl cursor-pointer text-slate-600 hover:text-slate-800 transition-colors",
+}
+
+const BOTONES = {
+  agregar: `px-4 py-3 font-semibold cursor-pointer transition-all duration-200 text-white transform hover:scale-105 bg-emerald-500 hover:bg-emerald-600`,
+  consultar: `px-4 py-3 font-semibold cursor-pointer transition-all duration-200 text-white transform hover:scale-105 bg-blue-500 hover:bg-blue-600`,
+  modificar: `px-4 py-3 font-semibold cursor-pointer transition-all duration-200 text-white transform hover:scale-105 bg-amber-500 hover:bg-amber-600`,
+  eliminar: `px-4 py-3 font-semibold cursor-pointer transition-all duration-200 text-white transform hover:scale-105 bg-red-500 hover:bg-red-600`,
+}
+
 function PanelDeControl() {
     const [mostrarAgregarEvento, setMostrarAgregarEvento] = useState(false);
     const [mostrarListaEventos, setMostrarListaEventos] = useState(false);
@@ -123,129 +150,119 @@ function PanelDeControl() {
     return (
         <>
         <NavbarAdmin />
-        <div className={PanelDeControlStyles.centrarContenedor}>
-            <div className={PanelDeControlStyles.contenedor}>
-            <h1 className={PanelDeControlStyles.titulo}>Panel de control</h1>
 
-            <section className={PanelDeControlStyles.seccion}>
-                <h2 className={PanelDeControlStyles.subtitulo}>Eventos</h2>
-                <div className={PanelDeControlStyles.botonesContenedor}>
-                <button className={`${PanelDeControlStyles.boton} ${PanelDeControlStyles.botonAgregar}`} onClick={handleMostrarAgregarEvento}>Agregar</button>
-                <button className={`${PanelDeControlStyles.boton} ${PanelDeControlStyles.botonConsultar}`} onClick={() => setMostrarListaEventos(true)}>Consultar</button>
-                <button className={`${PanelDeControlStyles.boton} ${PanelDeControlStyles.botonModificar}`}>Modificar</button>
-                <button className={`${PanelDeControlStyles.boton} ${PanelDeControlStyles.botonEliminar}`} onClick={()=> setMostrarEliminarEvento(true)}>Eliminar</button>
-                </div>
-            </section>
+        <div className={STYLES.centrarContenedor}>
+        <div className={STYLES.contenedor}>
+        <h1 className={STYLES.titulo}>Panel de control</h1>
 
-            <section className={PanelDeControlStyles.seccion}>
-                <h2 className={PanelDeControlStyles.subtitulo}>Categoría de eventos</h2>
-                <div className={PanelDeControlStyles.botonesContenedor}>
-                <button className={`${PanelDeControlStyles.boton} ${PanelDeControlStyles.botonAgregar}`} onClick={handleMostrarAgregarCategorias}>Agregar</button>
-                <button className={`${PanelDeControlStyles.boton} ${PanelDeControlStyles.botonConsultar}`} onClick={handleMostrarListaCategorias}>Consultar</button>
-                <button className={`${PanelDeControlStyles.boton} ${PanelDeControlStyles.botonModificar}`} onClick={handleModificarCategoria}>Modificar</button>
-                <button className={`${PanelDeControlStyles.boton} ${PanelDeControlStyles.botonEliminar}`} onClick={handleEliminarCategoria}>Eliminar</button>
-                </div>
-            </section>
-
-            <section className={PanelDeControlStyles.seccion}>
-                <h2 className={PanelDeControlStyles.subtitulo}>Reportes</h2>
-                <div className={PanelDeControlStyles.botonesContenedor}>
-                <button className={`${PanelDeControlStyles.boton} ${PanelDeControlStyles.botonAgregar}`} onClick={handleMostrarGenerarReporte}>Agregar</button>
-                <button className={`${PanelDeControlStyles.boton} ${PanelDeControlStyles.botonConsultar}`}>Consultar</button>
-                <button className={`${PanelDeControlStyles.boton} ${PanelDeControlStyles.botonModificar}`}>Modificar</button>
-                <button className={`${PanelDeControlStyles.boton} ${PanelDeControlStyles.botonEliminar}`}>Eliminar</button>
-                </div>
-            </section>
+        <section className={STYLES.seccion}>
+            <h2 className={STYLES.subtituloSeccion}>Eventos</h2>
+            <p className={STYLES.descripcionSeccion}>Gestiona todos los eventos del sistema</p>
+            <div className={STYLES.botonesContenedor}>
+            <button className={BOTONES.agregar} onClick={handleMostrarAgregarEvento}>Agregar</button>
+            <button className={BOTONES.consultar} onClick={() => setMostrarListaEventos(true)}>Consultar</button>
+            <button className={BOTONES.modificar}>Modificar</button>
+            <button className={BOTONES.eliminar}  onClick={()=> setMostrarEliminarEvento(true)}>Eliminar</button>
             </div>
-        </div>
-        <Footer />
+        </section>
 
-        {/* Modales */}
-        {mostrarAgregarEvento && (
-            <div className={PanelDeControlStyles.modal}>
-                <div className={PanelDeControlStyles.modalContenido}>
-                    <button onClick={handleCerrarAgregarEvento} className={PanelDeControlStyles.cerrarModal}><X size={50}/></button>
-                    <Evento onAgregar={handleAgregarEvento}/>
-                </div>
+        <section className={STYLES.seccion}>
+            <h2 className={STYLES.subtituloSeccion}>Categorías</h2>
+            <p className={STYLES.descripcionSeccion}>Administra las categorías de eventos</p>
+            <div className={STYLES.botonesContenedor}>
+            <button className={BOTONES.agregar} onClick={handleMostrarAgregarCategorias}>Agregar</button>
+            <button className={BOTONES.consultar} onClick={handleMostrarListaCategorias}>Consultar</button>
+            <button className={BOTONES.modificar} onClick={handleModificarCategoria}>Modificar</button>
+            <button className={BOTONES.eliminar} onClick={handleEliminarCategoria}>Eliminar</button>
             </div>
-        )}
 
-        {mostrarListaEventos && (
-            <div className={PanelDeControlStyles.modal}>
-                <div className={PanelDeControlStyles.modalContenido}>
-                <button onClick={() => setMostrarListaEventos(false)} className={PanelDeControlStyles.cerrarModal}><X size={30}/></button>
-                <ListaEventosAdmin onClose={() => setMostrarListaEventos(false)} />
-                </div>
+        </section>
+
+        <section className={STYLES.seccion}>
+            <h2 className={STYLES.subtituloSeccion}>Reportes</h2>
+            <p className={STYLES.descripcionSeccion}>Genera reportes de los eventos</p>
+            <div className={STYLES.botonesContenedor}>
+            <button className={BOTONES.agregar} onClick={handleMostrarGenerarReporte}>Agregar</button>
+            <button className={BOTONES.consultar}>Consultar</button>
+            <button className={BOTONES.modificar}>Modificar</button>
+            <button className={BOTONES.eliminar}>Eliminar</button>
+
             </div>
-        )}
-
-        {mostrarEliminarEvento && (
-    <div className={PanelDeControlStyles.modal}>
-        <div className={PanelDeControlStyles.modalContenido}>
-            <EliminarEvento
-                onClose={() => setMostrarEliminarEvento(false)}
-                onEliminado={() => setMostrarEliminarEvento(false)} // puedes actualizar la lista global si usas contexto
-            />
+        </section>
         </div>
     </div>
-)}
+    <Footer />
 
-        {mostrarAgregarCategoria && (
-            <div className={PanelDeControlStyles.modal}>
-                <div className={PanelDeControlStyles.modalContenido}>
-                    <button onClick={handleCerrarAgregarCategorias} className={PanelDeControlStyles.cerrarModal}><X size={30}/></button>
-                    <AgregarCategoria onAgregar={handleAgregarCategorias}/>
-                </div>
-            </div>
-        )}
+      {/* Modales */}
+    {mostrarAgregarEvento && (
+        <div className={STYLES.modal}>
+          <div className={STYLES.modalContenido}>
+            <button onClick={handleCerrarAgregarEvento} className={STYLES.cerrarModal}><X size={30} /></button>
+            <Evento onAgregar={handleAgregarEvento} />
+          </div>
+        </div>
+    )}
 
-        {mostrarListaCategorias && (
-            <div className={PanelDeControlStyles.modal}>
-                <div className={PanelDeControlStyles.modalContenido}>
-                    <button onClick={() => setMostrarListaCategorias(false)} className={PanelDeControlStyles.cerrarModal}><X size={30}/></button>
-                    <ListaCategorias onClose={() => setMostrarListaCategorias(false)}/>
-                </div>
-            </div>
-        )}
+    {mostrarAgregarCategoria && (
+        <div className={STYLES.modal}>
+          <div className={STYLES.modalContenido}>
+            <button onClick={handleCerrarAgregarCategorias} className={STYLES.cerrarModal}><X size={30} /></button>
+            <AgregarCategoria onAgregar={handleAgregarCategorias} />
+          </div>
+        </div>
+    )}
 
-        {/* MODAL PARA SELECCIONAR CATEGORÍA */}
-        {mostrarSeleccionarCategoria && (
-            <div className={PanelDeControlStyles.modal}>
-                <div className={PanelDeControlStyles.modalContenido}>
-                    <button onClick={() => setMostrarSeleccionarCategoria(false)} className={PanelDeControlStyles.cerrarModal}><X size={30}/></button>
-                    <ListaCategorias
-                        modoSeleccion
-                        onSeleccionarCategoria={handleSeleccionarCategoria}
-                        onClose={() => setMostrarSeleccionarCategoria(false)}
-                    />
-                </div>
-            </div>
-        )}
+    {mostrarListaCategorias && (
+        <div className={STYLES.modal}>
+          <div className={STYLES.modalContenido}>
+            <button onClick={() => setMostrarListaCategorias(false)} className={STYLES.cerrarModal}><X size={30} /></button>
+            <ListaCategorias onClose={() => setMostrarListaCategorias(false)} />
+          </div>
+        </div>
+    )}
 
-        {/* MODAL PARA EDITAR CATEGORÍA */}
-        {categoriaSeleccionada && modoSeleccionCategoria === "modificar" && (
-            <div className={PanelDeControlStyles.modal}>
-                <div className={PanelDeControlStyles.modalContenido}>
-                    <button onClick={handleCerrarEdicion} className={PanelDeControlStyles.cerrarModal}><X size={30}/></button>
-                    <EditarCategoria
-                        categoria={categoriaSeleccionada}
-                        onClose={handleCerrarEdicion}
-                        onActualizada={handleCerrarEdicion}
-                    />
-                </div>
-            </div>
-        )}
+      {/* MODAL PARA SELECCIONAR CATEGORÍA */}
+    {mostrarSeleccionarCategoria && (
+        <div className={STYLES.modal}>
+          <div className={STYLES.modalContenido}>
+            <button onClick={() => setMostrarSeleccionarCategoria(false)} className={STYLES.cerrarModal}><X size={30} /></button>
+            <ListaCategorias
+              modoSeleccion
+              onSeleccionarCategoria={handleSeleccionarCategoria}
+              onClose={() => setMostrarSeleccionarCategoria(false)}
+            />
+          </div>
+        </div>
+    )}
 
-        {/* MODAL PARA CONFIRMAR ELIMINACIÓN */}
-        {categoriaSeleccionada && modoSeleccionCategoria === "eliminar" && (
-            <div className={PanelDeControlStyles.modal}>
-                <div className={PanelDeControlStyles.modalContenido}>
-                    <button onClick={handleCerrarEdicion} className={PanelDeControlStyles.cerrarModal}><X size={30}/></button>
-                    <p>¿Seguro que deseas eliminar la categoría <b>{categoriaSeleccionada.nombre}</b>?</p>
-                    <button style={{ color: "red", marginRight: 10 }} onClick={handleConfirmarEliminar}>Eliminar</button>
-                    <button onClick={handleCerrarEdicion}>Cancelar</button>
-                </div>
+      {/* MODAL PARA EDITAR CATEGORÍA */}
+    {categoriaSeleccionada && modoSeleccionCategoria === "modificar" && (
+        <div className={STYLES.modal}>
+          <div className={STYLES.modalContenido}>
+            <button onClick={handleCerrarEdicion} className={STYLES.cerrarModal}><X size={30} /></button>
+            <EditarCategoria
+              categoria={categoriaSeleccionada}
+              onClose={handleCerrarEdicion}
+              onActualizada={handleCerrarEdicion}
+            />
+          </div>
+        </div>
+    )}
+
+      {/* MODAL PARA CONFIRMAR ELIMINACIÓN */}
+    {categoriaSeleccionada && modoSeleccionCategoria === "eliminar" && (
+        <div className={STYLES.modal}>
+          <div className={STYLES.modalContenido}>
+            <button onClick={handleCerrarEdicion} className={STYLES.cerrarModal}><X size={30} /></button>
+            <div className="text-center p-6">
+              <p className="text-lg mb-6 text-slate-700">¿Seguro que deseas eliminar la categoría <b>{categoriaSeleccionada.nombre}</b>?</p>
+              <div className="flex gap-4 justify-center">
+                <button className="px-6 py-3 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-lg transition-colors shadow-md"onClick={handleConfirmarEliminar}>Eliminar</button>
+                <button className="px-6 py-3 bg-slate-500 hover:bg-slate-600 text-white font-semibold rounded-lg transition-colors shadow-md" onClick={handleCerrarEdicion}>Cancelar</button>
+              </div>
             </div>
+          </div>
+        </div>
         )}
 
         {/* MODAL PARA Agregar informe*/}
