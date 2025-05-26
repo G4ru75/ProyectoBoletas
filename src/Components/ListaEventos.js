@@ -17,7 +17,6 @@ function ListaEventos() {
             .then(data => {
                 const EventosActivos = data.filter(evento => evento.estado == true)
                 setEventos(EventosActivos);
-                console.log("Eventos obtenidos:", EventosActivos);
             })
             .catch(error => console.error("Error al obtener eventos:", error));
     }, []);

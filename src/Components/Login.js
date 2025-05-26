@@ -62,6 +62,11 @@ function Login() {
             sameSite: 'Strict' // La cookie no se enviará con solicitudes de terceros
           })
 
+          Cookies.set('user', JSON.stringify(data.user), {
+            expires: 1, // La cookie expirará en 1 día
+            secure: true, // Solo se enviará a través de HTTPS
+            sameSite: 'Strict' // La cookie no se enviará con solicitudes de terceros
+          });
           setNombreUsuario('');
           setContraseña('');
 

@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 function CartaEvento({ evento }) {
     const navigate = useNavigate();
-    console.log("Evento recibido:", evento);
+
     if (!evento) return null;
 
     const IrAEvento = () => {
