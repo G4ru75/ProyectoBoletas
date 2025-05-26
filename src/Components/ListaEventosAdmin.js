@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ListaEventosAdminStyle from '../Styles/ListaEventosAdmin.module.css';
 import Cookies from 'js-cookie';
 
-function ListaEventosAdmin({ onClose }) {
+function ListaEventosAdmin({ onClose, modoSeleccion = false, onSeleccionarEvento }) {
     const [eventos, setEventos] = useState([]);
     const [cargando, setCargando] = useState(true);
 
@@ -52,6 +52,7 @@ function ListaEventosAdmin({ onClose }) {
                                 <th>Tickets</th>
                                 <th>Estado</th>
                                 <th>Categoría</th>
+                                <th>Foto</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -63,16 +64,28 @@ function ListaEventosAdmin({ onClose }) {
                                     <td>{evento.direccion_Lugar}</td>
                                     <td>{new Date(evento.fecha).toLocaleString()}</td>
                                     <td>${evento.precioTicket}</td>
-                                    <td>{evento.tickets_Disponibles}</td>
+                                    <td>{evento.tickets_Disponible}</td>
                                     <td>{evento.estado ? "Activo" : "Inactivo"}</td>
-                                    <td>{evento.id_Categoria}</td>
+                                    <td>{evento.categoria}</td>
+                                    <td>
+                                        <img src={`data:image/jpeg;base64,${evento.imagen}`} alt="Imagen evento" 
+                                        className={ListaEventosAdminStyle.imagenEvento}/>
+                                    </td>
+
+                                    {modoSeleccion && (
+                                        <td>
+                                            <button className={ListaEventosAdminStyle.botonSeleccionar} onClick={() => onSeleccionarEvento(evento)}>
+                                                Seleccionar Evento
+                                            </button>
+                                        </td>
+                                    )}
                                 </tr>
                             ))}
                         </tbody>
                     </table>
                 </div>
             )}
-
+            
             <button className={ListaEventosAdminStyle.botonCerrar} onClick={onClose}>Cerrar</button>
         </div>
     );

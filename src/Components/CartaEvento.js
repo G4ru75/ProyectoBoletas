@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 function CartaEvento({ evento }) {
     const navigate = useNavigate();
-
+    console.log("Evento recibido:", evento);
     if (!evento) return null;
 
     const IrAEvento = () => {
@@ -18,7 +18,8 @@ function CartaEvento({ evento }) {
     return (
         <div className={cartaEventoStyle.tarjeta} style={{ margin: "0 auto" }}>
             <div className={cartaEventoStyle.contenedorImagen}>
-                <img src="/imagenes/Evento.jpeg" alt="Evento" className={cartaEventoStyle.imagen} />
+                <img src={`data:image/jpeg;base64,${evento.imagen}`} alt="Imagen evento" 
+                style={{width: "200px", height: "80px", objectFit: "contain", borderRadius:"8px"}}/>
             </div>
 
             <div className={cartaEventoStyle.contenido}>

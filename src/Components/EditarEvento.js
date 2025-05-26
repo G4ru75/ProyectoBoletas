@@ -1,9 +1,9 @@
 import { Minimize } from 'lucide-react';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, use } from 'react';
 import Cookies from 'js-cookie';
 import Swal from 'sweetalert2';
 
-function Evento({ eventoInicial, onAgregar, onModificar }) {
+function EditarEvento({ evento, onClose, onModificar }) {
     const [nombre, setNombre] = useState('');
     const [precio, setPrecio] = useState('');
     const [tipoBoleta, setTipoBoleta] = useState('');
@@ -25,6 +25,22 @@ function Evento({ eventoInicial, onAgregar, onModificar }) {
             setVerImagen(URL.createObjectURL(file)); 
         }
     };  
+
+    useEffect(() => {
+        console.log("Evento recibido:", evento);
+        if(evento){
+            setNombre(evento.nombre_Evento);
+            setPrecio(evento.precioTicket);
+            setTipoBoleta(evento.tipo_Boleta);
+            setCategoriaSeleccionada(evento.categoria);
+            setAforo(evento.aforo_Max);
+            setLugar(evento.nombre_Lugar);
+            setDireccion(evento.direccion_Lugar);
+            //setFecha(new Date(evento.fecha).toISOString().split('T')[0]);
+            //setHora(new Date(evento.fecha).toISOString().split('T')[1].substring(0, 5));
+            setDescripcion(evento.descripcion);
+        }
+    }, [evento]);
 
     useEffect(() => {
         const token = Cookies.get('token');
@@ -65,6 +81,8 @@ function Evento({ eventoInicial, onAgregar, onModificar }) {
     }, []);
 
     const handleSubmit = (e) => {
+
+        
             e.preventDefault();
     
             //Se usa formData porque en el back no acaptara el json por enciar la imagen
@@ -82,13 +100,9 @@ function Evento({ eventoInicial, onAgregar, onModificar }) {
             formEvento.append('Imagen', imagen); // Agregar la imagen al FormData
     
             const token = Cookies.get('token'); 
-            console.log(token);
-            for (let pair of formEvento.entries()) {
-                console.log(`${pair[0]}:`, pair[1]);
-                }
             
-            fetch("https://localhost:7047/api/Eventos", {
-                method: "POST",
+            fetch(`https://localhost:7047/api/Eventos/${evento.id_Evento}`, {
+                method: "PUT",
                 headers: {
                 "Authorization": `Bearer ${token}`, //Token de autenticacion 
                 //"Content-Type": "application/json"  no se usa porque no se envia datos en forma de JSon
@@ -100,7 +114,7 @@ function Evento({ eventoInicial, onAgregar, onModificar }) {
                     Swal.fire({
                         icon: 'success',
                         title: 'Éxito',
-                        text: 'Evento agregada correctamente',
+                        text: 'Evento modificado correctamente',
                     });
                     setNombre("");
                     setPrecio("");
@@ -207,9 +221,9 @@ function Evento({ eventoInicial, onAgregar, onModificar }) {
                 </div>
     
             </div>
-            <button type="submit" className='bg-green-500 hover:bg-green-700 text-white font-bold py-3 px-6 focus:outline-none transform transition-all hover:scale-105'>Aceptar</button>
+            <button type="submit" className='bg-green-500 hover:bg-green-700 text-white font-bold py-3 px-6 focus:outline-none transform transition-all hover:scale-105'>Modificar</button>
         </form>
     );
 
 }   
-export default Evento;
+export default EditarEvento;

@@ -3,6 +3,8 @@ import PanelDeControlStyles from "../Styles/PanelDeControl.module.css";
 import NavbarAdmin from "./NavbarAdmin";
 import Footer from "./Footer";
 import Evento from "./Evento";
+import EditarEvento from "./EditarEvento";
+import EliminarEvento from "./EliminarEvento";
 import AgregarCategoria from "./AgregarCategoria";
 import ListaCategorias from "./ListaCategoria";
 import EditarCategoria from "./EditarCategoria";
@@ -10,7 +12,6 @@ import ListaEventosAdmin from "./ListaEventosAdmin";
 import {List, X} from "lucide-react";
 import Swal from "sweetalert2";
 import Cookies from "js-cookie";
-import EliminarEvento from "./EliminarEvento";
 import GenerarReporte from "./GenerarReportes";
 
 
@@ -28,7 +29,7 @@ const STYLES = {
     descripcionSeccion: "text-center mb-6 text-sm text-slate-600",
     botonesContenedor: "grid grid-cols-2 md:grid-cols-4 gap-3",
 
-    modal: "fixed top-0 left-0 w-screen h-screen flex items-center justify-center",
+    modal: "fixed top-0 left-0 w-screen h-screen flex items-center justify-center rounded-lg boder border-black",
     modalContenido: "bg-white p-8 max-w-4xl relative overflow-y-auto max-h-[90vh]",
     cerrarModal:"absolute top-2 right-4 text-2xl cursor-pointer text-slate-600 hover:text-slate-800 transition-colors",
     }
@@ -44,7 +45,9 @@ function PanelDeControl() {
     const [mostrarAgregarEvento, setMostrarAgregarEvento] = useState(false);
     const [mostrarListaEventos, setMostrarListaEventos] = useState(false);
     const [mostrarEliminarEvento, setMostrarEliminarEvento] = useState(false);
-
+    const [mostrarEditarEvento, setMostrarEditarEvento] = useState(false);
+    const [eventoSeleccionado, setEventoSeleccionado] = useState(null);
+    
     const [mostrarAgregarCategoria, setMostrarAgregarCategoria] = useState(false);
     const [mostrarListaCategorias, setMostrarListaCategorias] = useState(false);
 
@@ -64,9 +67,22 @@ function PanelDeControl() {
     }; 
 
     const handleAgregarEvento = () => {
-        console.log("Evento agregado");
         handleCerrarAgregarEvento();
     };
+
+    const handleSeleccionarEvento = () => {
+        setMostrarEditarEvento(true);
+    }
+
+    const handleSeleccionarEventoModificar = (evento) => {
+        setEventoSeleccionado(evento);
+        setMostrarEditarEvento(false); // Cierra la lista
+    };
+
+    const handleCerrarEditarEvento = () => {
+        setEventoSeleccionado(null);
+    }
+
     
     // Categorias
     const handleMostrarAgregarCategorias = () =>{
@@ -78,7 +94,6 @@ function PanelDeControl() {
     }; 
 
     const handleAgregarCategorias = () => {
-        console.log("categoria agregado");
         handleCerrarAgregarCategorias();
     }; 
 
@@ -105,6 +120,7 @@ function PanelDeControl() {
     const handleSeleccionarCategoria = (cat) => {
         setCategoriaSeleccionada(cat);
         setMostrarSeleccionarCategoria(false);
+        setTimeout(() => { setCategoriaSeleccionada(cat); }, 500); // Espera para que se actualice la categoría seleccionada
     };
 
     // Cuando se termina de editar o eliminar
@@ -161,7 +177,7 @@ function PanelDeControl() {
             <div className={STYLES.botonesContenedor}>
             <button className={BOTONES.agregar} onClick={handleMostrarAgregarEvento}>Agregar</button>
             <button className={BOTONES.consultar} onClick={() => setMostrarListaEventos(true)}>Consultar</button>
-            <button className={BOTONES.modificar}>Modificar</button>
+            <button className={BOTONES.modificar} onClick={handleSeleccionarEvento}>Modificar</button>
             <button className={BOTONES.eliminar}  onClick={()=> setMostrarEliminarEvento(true)}>Eliminar</button>
             </div>
         </section>
@@ -213,6 +229,34 @@ function PanelDeControl() {
         </div>
     )}
 
+    {mostrarEditarEvento && (
+        <div className={STYLES.modal}>
+            <div className={STYLES.modalContenido}>
+                <button onClick={() => setMostrarEditarEvento(false)} className={STYLES.cerrarModal}><X size={30} /></button>
+                <ListaEventosAdmin 
+                    modoSeleccion 
+                    onSeleccionarEvento={handleSeleccionarEventoModificar}
+                    onClose={() => setMostrarEditarEvento(false)}
+                />
+            </div>
+        </div>
+    )}
+
+    {eventoSeleccionado && (
+        <div className={STYLES.modal}>
+            <div className={STYLES.modalContenido}>
+                <button onClick={handleCerrarEditarEvento} className={STYLES.cerrarModal}><X size={30} /></button>
+                <EditarEvento
+                    evento={eventoSeleccionado}
+                    onClose={handleCerrarEditarEvento}
+                    onActualizado={handleCerrarEditarEvento}
+                />
+            </div>
+        </div>
+    )}
+
+
+
     {mostrarEliminarEvento && (
         <div className={STYLES.modal}>
             <div className={STYLES.modalContenido}>
@@ -222,6 +266,7 @@ function PanelDeControl() {
         </div>
     )}
 
+    {/* Modales para categorias*/}
     {mostrarAgregarCategoria && (
             <div className={STYLES.modal}>
             <div className={STYLES.modalContenido}>

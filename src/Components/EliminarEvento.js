@@ -48,12 +48,11 @@ function EliminarEvento({ onClose, onEliminado }) {
                 if (res.ok) {
                     Swal.fire("Eliminado", "Evento eliminado correctamente", "success");
                     setEventos(prev => prev.filter(ev => ev.id_Evento !== id_Evento));
-                    onEliminado(); // para refrescar desde el Panel si quieres
+                    onEliminado(); // para refrescar desde el Panel 
                 } else {
-                    Swal.fire("Error", "No se pudo eliminar el evento", "error");
+                    Swal.fire("Error", "No se pudo eliminar el evento");
                 }
             } catch (error) {
-                console.error("Error eliminando evento", error);
                 Swal.fire("Error", "No se pudo eliminar el evento", "error");
             }
         }

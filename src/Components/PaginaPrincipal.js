@@ -8,6 +8,7 @@ function PaginaPrincipal() {
         <>
             <NavBar />
             <BarraBusqueda />
+            <h1>   Eventos disponibles</h1>
             <ListaEventos />
             <Footer />
         </>
