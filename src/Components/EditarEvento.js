@@ -1,5 +1,5 @@
 import { Minimize } from 'lucide-react';
-import React, { useState, useEffect, use } from 'react';
+import React, { useState, useEffect} from 'react';
 import Cookies from 'js-cookie';
 import Swal from 'sweetalert2';
 
@@ -17,7 +17,9 @@ function EditarEvento({ evento, onClose, onModificar }) {
     const [imagen, setImagen] = useState(null);
     const [verImagen, setVerImagen] = useState('');
     const [descripcion, setDescripcion] = useState('');
-    
+    const[Entradas_Disponibles, setEntradas_Disponibles] = useState('');
+    const [Estado, setEstado] = useState(true);
+
     const handleImagen = (e) => {
         const file = e.target.files[0]; 
         if(file){
@@ -36,9 +38,8 @@ function EditarEvento({ evento, onClose, onModificar }) {
             setAforo(evento.aforo_Max);
             setLugar(evento.nombre_Lugar);
             setDireccion(evento.direccion_Lugar);
-            //setFecha(new Date(evento.fecha).toISOString().split('T')[0]);
-            //setHora(new Date(evento.fecha).toISOString().split('T')[1].substring(0, 5));
-            setDescripcion(evento.descripcion);
+            setEntradas_Disponibles(evento.tickets_Disponible);
+            setDescripcion(evento.descripcion); 
         }
     }, [evento]);
 
@@ -80,65 +81,88 @@ function EditarEvento({ evento, onClose, onModificar }) {
         });
     }, []);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
 
         
             e.preventDefault();
-    
+
+            const FechaHora = `${fecha}T${hora}`; // Combina fecha y hora en un solo string
+
             //Se usa formData porque en el back no acaptara el json por enciar la imagen
             const formEvento = new FormData(); 
             formEvento.append('Nombre_Evento', nombre);
             formEvento.append('Descripcion', descripcion);
             formEvento.append('Nombre_Lugar', lugar);
             formEvento.append('Direccion_Lugar', direccion);
-            //formEvento.append('Fecha', new Date(`${fecha}T${hora}`).toISOString());
+            formEvento.append('Fecha', FechaHora);
             formEvento.append('Aforo_Max', aforo);
             formEvento.append('PrecioTicket', precio);
-            //formEvento.append('Tickets_Disponible', aforo);
-            //formEvento.append('Estado', true);
+            formEvento.append('Tickets_Disponible', Entradas_Disponibles);
+            formEvento.append('Estado', Estado);
             formEvento.append('Categoria', categoriaSeleccionada);
             formEvento.append('Imagen', imagen); // Agregar la imagen al FormData
     
             const token = Cookies.get('token'); 
             
-            fetch(`https://localhost:7047/api/Eventos/${evento.id_Evento}`, {
-                method: "PUT",
-                headers: {
-                "Authorization": `Bearer ${token}`, //Token de autenticacion 
-                //"Content-Type": "application/json"  no se usa porque no se envia datos en forma de JSon
-                },
-    
-                body:formEvento // se envia el formEvento
-            }).then((response) => {
-                if (response.ok) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Éxito',
-                        text: 'Evento modificado correctamente',
-                    });
-                    setNombre("");
-                    setPrecio("");
-                    setTipoBoleta("");
-                    setCategoriaSeleccionada("");
-                    setAforo("");
-                    setLugar("");
-                    setDireccion("");
-                    setFecha("");
-                    setHora("");
-                    setImagen("");
-                    setDescripcion("");
-                    
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'No se pudo agregar el evento',
-                    });
-                    console.log(response);
-                    console.log(formEvento);
-                    console.log(token);
-                }
+            const confirm = await Swal.fire({
+                title: `Modificar el evento "${evento.nombre_Evento}"?`,
+                text: "Esta acción no se puede deshacer.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Sí, modificar',
+                cancelButtonText: 'Cancelar'
             });
+
+            if(confirm.isConfirmed){
+                    fetch(`https://localhost:7047/api/Eventos/${evento.id_Evento}`, {
+                    method: "PUT",
+                    headers: {
+                    "Authorization": `Bearer ${token}`, //Token de autenticacion 
+                    //"Content-Type": "application/json"  no se usa porque no se envia datos en forma de JSon
+                    },
+        
+                    body:formEvento // se envia el formEvento
+                }).then((response) => {
+                    if (response.ok) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Éxito',
+                            text: 'Evento modificado correctamente',
+                        });
+                        setNombre("");
+                        setPrecio("");
+                        setTipoBoleta("");
+                        setCategoriaSeleccionada("");
+                        setAforo("");
+                        setLugar("");
+                        setDireccion("");
+                        setFecha("");
+                        setHora("");
+                        setImagen(null);
+                        setVerImagen("");
+                        setDescripcion("");
+                        setEntradas_Disponibles("");
+                        setEstado(true);
+                        onClose(); // Cerrar el modal o formulario
+                        
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'No se pudo agregar el evento',
+                        });
+                        console.log(response);
+                        console.log(formEvento);
+                        console.log(token);
+                    }
+                });
+            }else{
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Éxito',
+                    text: 'Modificación cancelada',
+                })
+            }
         }
     
     return (
@@ -176,6 +200,13 @@ function EditarEvento({ evento, onClose, onModificar }) {
                     <input type="text" placeholder="Aforo" value={aforo} onChange={(e) => setAforo(e.target.value)} min={1} pattern='[0-9]+'
                     className=" border rounded-md w-full py-2 px-3 text-gray-700  focus:outline-none focus:ring-2 focus:ring-blue-500" required/>
                 </div>
+
+                <div className="mb-4">
+                    <label  className="text-gray-700 text-sm font-bold mb-2">Entradas disponibles</label>
+                    <input type="text" placeholder="Numero de estradas disponibles" value={Entradas_Disponibles} onChange={(e) => setEntradas_Disponibles(e.target.value)} min={1} pattern='[0-9]+'
+                    className=" border rounded-md w-full py-2 px-3 text-gray-700  focus:outline-none focus:ring-2 focus:ring-blue-500" required/>
+                </div>
+
                 <div className="mb-4">
                     <label className=" text-gray-700 text-sm font-bold mb-2">Lugar</label>
                     <input type="text" placeholder="Nombre del lugar" value={lugar} onChange={(e) => setLugar(e.target.value)}
@@ -197,6 +228,16 @@ function EditarEvento({ evento, onClose, onModificar }) {
                     <label className="text-gray-700 text-sm font-bold mb-2">Hora</label>
                     <input type="time" placeholder="Hora" value={hora} onChange={(e) => setHora(e.target.value)} 
                     className=" border rounded-md w-full py-2 px-3 text-gray-700  focus:outline-none focus:ring-2 focus:ring-blue 500" required/>
+                </div>
+
+                <div className="mb-4">
+                    <label className="text-gray-700 text-sm font-bold mb-2">Estado</label>
+                    <select value={Estado} onChange={(e) => setEstado(e.target.value)}
+                        className="border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500"required>
+                        <option value="">Seleccione el nuevo estado</option>
+                        <option value="true">Activo</option>
+                        <option value="false">Inactivo</option>
+                    </select>
                 </div>
     
                 <div className="mb-4">

@@ -66,26 +66,22 @@ function Evento({ eventoInicial, onAgregar, onModificar }) {
 
     const handleSubmit = (e) => {
             e.preventDefault();
-    
+
+             const FechaHora = `${fecha}T${hora}`; // Combina fecha y hora en un solo string
+            
             //Se usa formData porque en el back no acaptara el json por enciar la imagen
             const formEvento = new FormData(); 
             formEvento.append('Nombre_Evento', nombre);
             formEvento.append('Descripcion', descripcion);
             formEvento.append('Nombre_Lugar', lugar);
             formEvento.append('Direccion_Lugar', direccion);
-            //formEvento.append('Fecha', new Date(`${fecha}T${hora}`).toISOString());
+            formEvento.append('Fecha', FechaHora);
             formEvento.append('Aforo_Max', aforo);
             formEvento.append('PrecioTicket', precio);
-            //formEvento.append('Tickets_Disponible', aforo);
-            //formEvento.append('Estado', true);
             formEvento.append('Categoria', categoriaSeleccionada);
             formEvento.append('Imagen', imagen); // Agregar la imagen al FormData
     
             const token = Cookies.get('token'); 
-            console.log(token);
-            for (let pair of formEvento.entries()) {
-                console.log(`${pair[0]}:`, pair[1]);
-                }
             
             fetch("https://localhost:7047/api/Eventos", {
                 method: "POST",
@@ -111,8 +107,10 @@ function Evento({ eventoInicial, onAgregar, onModificar }) {
                     setDireccion("");
                     setFecha("");
                     setHora("");
-                    setImagen("");
+                    setImagen(null);
+                    setVerImagen("");
                     setDescripcion("");
+                    
                     
                 } else {
                     Swal.fire({
@@ -120,9 +118,6 @@ function Evento({ eventoInicial, onAgregar, onModificar }) {
                         title: 'Error',
                         text: 'No se pudo agregar el evento',
                     });
-                    console.log(response);
-                    console.log(formEvento);
-                    console.log(token);
                 }
             });
         }

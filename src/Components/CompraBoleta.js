@@ -1,23 +1,22 @@
 import Footer from "./Footer"
 import NavBar from "./navbar"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useLocation } from "react-router-dom"
 
-function CompraBoleta({ evento }) {
-    const {
-    nombre = "Evento de 2",
-    precio = "2000000",
-    imagen = "",
-    descripcion = "Un evento increible e espeknjnc",
-    lugar = "colombia",
-    fecha = "22-09-23",
-    hora = "10:20 AM",
-    duracion = "30 minutos",
-    categoria = "Concierto",
-    entradasDisponibles = "300",
-    estado = "NO se",
-    } = evento || {}
+function CompraBoleta() {
 
     const navigate = useNavigate();
+    const Location = useLocation();
+    const evento = Location.state?.evento;
+    
+    if (!evento) {
+        return <p className='text-center mt-10 text-red-500'>No se ha seleccionado ningún evento.</p>;
+    }
+
+    const fechaCompleta = new Date(evento.fecha); // Toma la fecha del evento en formato Date
+    const fecha = fechaCompleta.toLocaleDateString(); 
+    const hora = fechaCompleta.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); // Formatea la hora
+    //las separa y formatea la fecha y hora en formatos string y de manera local
+
 
     const IrAEspecificacionCompra = () => {
         navigate("/especificacionCompra");
@@ -36,7 +35,11 @@ return (
             <div className="space-y-6">
             <div>
                 <p className="font-semibold text-gray-800 mb-1">Lugar</p>
-                <p className="text-gray-700 border-b border-gray-400 pb-1">{lugar}</p>
+                <p className="text-gray-700 border-b border-gray-400 pb-1">{evento.nombre_Lugar}</p>
+            </div>
+            <div>
+                <p className="font-semibold text-gray-800 mb-1">Direccion</p>
+                <p className="text-gray-700 border-b border-gray-400 pb-1">{evento.direccion_Lugar}</p>
             </div>
 
             <div>
@@ -50,23 +53,18 @@ return (
             </div>
 
             <div>
-                <p className="font-semibold text-gray-800 mb-1">Duración</p>
-                <p className="text-gray-700 border-b border-gray-400 pb-1">{duracion}</p>
-            </div>
-
-            <div>
                 <p className="font-semibold text-gray-800 mb-1">Categoría</p>
-                <p className="text-gray-700 border-b border-gray-400 pb-1">{categoria}</p>
+                <p className="text-gray-700 border-b border-gray-400 pb-1">{evento.categoria}</p>
             </div>
 
             <div>
                 <p className="font-semibold text-gray-800 mb-1">Entradas disponibles</p>
-                <p className="text-gray-700 border-b border-gray-400 pb-1">{entradasDisponibles}</p>
+                <p className="text-gray-700 border-b border-gray-400 pb-1">{evento.tickets_Disponible}</p>
             </div>
 
             <div>
                 <p className="font-semibold text-gray-800 mb-1">Estado</p>
-                <p className="text-gray-700 border-b border-gray-400 pb-1">{estado}</p>
+                <p className="text-gray-700 border-b border-gray-400 pb-1">{evento.estado ? "Abierto" : "cerrado"}</p>
             </div>
             </div>
 
@@ -77,10 +75,12 @@ return (
         </div>
 
         <div className="bg-gray-200 rounded-lg p-6 flex-1">
-        {imagen ? (
-            <div className="bg-white rounded-lg h-80 flex items-center justify-center mb-6 overflow-hidden">
-            <img src={imagen || ""} alt={`Imagen de ${nombre}`}className="w-full h-full object-contain"
+        {evento.imagen ? (
+            <div className="bg-gray rounded-lg h-80 flex items-center justify-center mb-6 overflow-hidden">
+            <img src={`data:image/jpeg;base64,${evento.imagen}`} alt={`Imagen de evento`}className="w-full h-full object-contain"
+            
             />
+
             </div>
             ) : (
             <div className="bg-white rounded-lg h-80 flex items-center justify-center mb-6">
@@ -91,17 +91,17 @@ return (
         <div className="flex justify-between mb-4">
             <div>
                 <p className="font-semibold text-gray-800">Nombre</p>
-                <p className="text-gray-700">{nombre}</p>
+                <p className="text-gray-700">{evento.nombre_Evento}</p>
             </div>
             <div>
                 <p className="font-semibold text-gray-800">Precio</p>
-                <p className="text-gray-700">{precio && `$${precio}`}</p>
+                <p className="text-gray-700">{evento.precioTicket}</p>
             </div>
             </div>
 
             <div className="mt-4">
                 <p className="font-semibold text-gray-800 text-center mb-2">Descripción del evento</p>
-                <p className="text-gray-700 text-sm">{descripcion}</p>
+                <p className="text-gray-700 text-sm">{evento.descripcion}</p>
             </div>
         </div>
 

@@ -113,7 +113,7 @@ const handleSubmit = (e) => {
             placeholder='Digite su nombre'
             maxLength={20}
             minLength={3}
-            pattern="[A-Za-z]+"
+            pattern="[A-Za-z ]+"
             title="El nombre solo puede contener letras"
             required
             value={nombre}
@@ -126,7 +126,7 @@ const handleSubmit = (e) => {
             placeholder='Digite su apellido'
             maxLength={20}
             minLength={3}
-            pattern="[A-Za-z]+"
+            pattern="[A-Za-z ]+"
             title="El nombre solo puede contener letras"
             required
             value={apellido}
@@ -152,7 +152,7 @@ const handleSubmit = (e) => {
             placeholder='Digite su nombre de usuario'
             maxLength={20}
             minLength={3}
-            pattern='(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}+'
+            pattern='(?=.*[A-Za-z ])(?=.*\d)[A-Za-z\d ]{6,}+'
             required
             value={nombreUsuario}
             onChange={(e => setNombreUsuario(e.target.value))}

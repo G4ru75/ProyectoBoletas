@@ -9,7 +9,8 @@ function CartaEvento({ evento }) {
     if (!evento) return null;
 
     const IrAEvento = () => {
-        navigate(`/evento`);
+        navigate(`/evento`, {state: { evento } });
+        window.scrollTo(0, 0); // Desplazar hacia arriba al cargar la página del evento
     };
 
     const fechaFormateada = new Date(evento.fecha).toLocaleDateString();
@@ -18,8 +19,7 @@ function CartaEvento({ evento }) {
     return (
         <div className={cartaEventoStyle.tarjeta} style={{ margin: "0 auto" }}>
             <div className={cartaEventoStyle.contenedorImagen}>
-                <img src={`data:image/jpeg;base64,${evento.imagen}`} alt="Imagen evento" 
-                style={{width: "200px", height: "80px", objectFit: "contain", borderRadius:"8px"}}/>
+                <img src={`data:image/jpeg;base64,${evento.imagen}`} alt="Imagen evento" className={cartaEventoStyle.imagen}/>
             </div>
 
             <div className={cartaEventoStyle.contenido}>
@@ -39,14 +39,6 @@ function CartaEvento({ evento }) {
                         <div>
                             <span className={cartaEventoStyle.etiqueta}>Fecha</span>
                             <p className={cartaEventoStyle.texto}>{fechaFormateada}</p>
-                        </div>
-                    </div>
-
-                    <div className={cartaEventoStyle.elementoInfo}>
-                        <Timer className={cartaEventoStyle.icono} size={16} />
-                        <div>
-                            <span className={cartaEventoStyle.etiqueta}>Duración</span>
-                            <p className={cartaEventoStyle.texto}>--</p>
                         </div>
                     </div>
 
