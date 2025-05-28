@@ -62,6 +62,11 @@ function Login() {
             sameSite: 'Strict' // La cookie no se enviará con solicitudes de terceros
           })
 
+          Cookies.set('user', JSON.stringify(data.user), {
+            expires: 1, // La cookie expirará en 1 día
+            secure: true, // Solo se enviará a través de HTTPS
+            sameSite: 'Strict' // La cookie no se enviará con solicitudes de terceros
+          });
           setNombreUsuario('');
           setContraseña('');
 
@@ -71,7 +76,7 @@ function Login() {
             title: 'Éxito',
             text: `Bienvenido usuario ${data.user.nombre} ${data.user.apellido}`,
           });
-            navegar('/'); //Ir a principal si los datos si el usuario es usuario jsndajsddfsdj
+            navegar('/PaginaPrincipal'); //Ir a principal si los datos si el usuario es usuario jsndajsddfsdj
           }else if(data.user.rol === 'Admin'){
             Swal.fire({                     //Donde va el token y el user
             icon: 'success',

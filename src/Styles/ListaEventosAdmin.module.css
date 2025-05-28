@@ -1,0 +1,130 @@
+/* src/Styles/ListaEventosAdmin.module.css */
+
+.contenedor {
+    padding: 30px 25px;
+    background-color: #fff;
+    border-radius: 15px;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+}
+
+.titulo {
+    font-size: 28px;
+    margin-bottom: 25px;
+    text-align: center;
+    font-weight: 600;
+    color: #222;
+    letter-spacing: 1px;
+}
+
+.mensaje {
+    text-align: center;
+    font-style: italic;
+    color: #777;
+    font-size: 18px;
+}
+
+.tablaContenedor {
+    overflow-x: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.tabla {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 12px; /* espacio entre filas */
+    min-width: 900px; /* para evitar que se compacte demasiado */
+}
+
+.tabla th, .tabla td {
+    padding: 14px 18px;
+    text-align: center;
+}
+
+.tabla th {
+    background-color: #f8f9fa;
+    font-weight: 700;
+    color: #555;
+    text-transform: uppercase;
+    font-size: 14px;
+    border-bottom: 2px solid #e1e4e8;
+    letter-spacing: 0.05em;
+}
+
+.tabla tbody tr {
+    background-color: #fafafa;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    border-radius: 10px;
+    transition: background-color 0.25s ease;
+}
+
+.tabla tbody tr:hover {
+    background-color: #f0f4ff;
+}
+
+.tabla tbody td {
+    border-bottom: none; /* quitar líneas de celda para suavidad */
+    font-size: 15px;
+    color: #444;
+}
+
+.tabla img {
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    object-fit: cover;
+    max-width: 200px;
+    max-height: 80px;
+}
+
+.botonCerrar {
+    margin-top: 30px;
+    padding: 12px 28px;
+    background-color: #ff4c4c;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 16px;
+    font-weight: 600;
+    box-shadow: 0 4px 10px rgba(255, 76, 76, 0.3);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.botonCerrar:hover {
+    background-color: #d43737;
+    box-shadow: 0 6px 15px rgba(212, 55, 55, 0.5);
+}
+
+.botonSeleccionar {
+    padding: 10px 20px;
+    background-color: #f5c518;
+    color: #333;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.botonSeleccionar:hover {
+    background-color: #d4b314;
+    box-shadow: 0 4px 10px rgba(212, 179, 20, 0.4);
+}
+
+.imagenEvento {
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    object-fit: cover;
+    max-width: 200px;
+    max-height: 80px;
+    width: 100%;
+    height: auto;
+}

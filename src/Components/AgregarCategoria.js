@@ -56,10 +56,10 @@ function AgregarCategoria({ onAgregar }) {
                 value={nombre}
                 onChange={(e) => setNombre(e.target.value)}
                 required
-                pattern="[A-Za-z]+"
+                pattern="[A-Za-z ]+"
                 title="El nombre solo puede contener letras"
                 minLength={3}
-                maxLength={20}
+                maxLength={30}
                 />
             </div>
 

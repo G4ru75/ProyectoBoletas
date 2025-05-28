@@ -1,12 +1,23 @@
 import react from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Search, Filter, X } from 'lucide-react';
 import BarraBusquedaStyle from '../Styles/BarraBusqueda.module.css';
 
 function BarraBusqueda() {
 
     const [filtrosAbiertos, setFiltrosAbiertos] = useState(false);
-    
+    const [Categorias, setCategorias] = useState([]); 
+
+    useEffect(() => {
+            fetch("https://localhost:7047/api/Categorias", {
+            })
+            .then(res => res.json())
+            .then(data => {
+                setCategorias(data);
+            });
+        }, []);
+
+
     const toggleFiltros = () => {
         setFiltrosAbiertos(!filtrosAbiertos);
     };
@@ -20,10 +31,10 @@ function BarraBusqueda() {
             <div className={BarraBusquedaStyle.filtersDesktop}>
             <input type="date" placeholder="Fecha" className={BarraBusquedaStyle.filter} />
             <select className={BarraBusquedaStyle.filter}>
-                <option>Categoría</option>
-                <option value="Seminario">Seminario</option>
-                <option value="Concierto">Concierto</option>
-                <option value="Conferencia">Conferencia</option>
+                <option value="" >Categoria</option>
+                {Categorias.map((cat) => (
+                        <option key={cat.id_Categoria} value={cat.nombre}>{cat.nombre}</option>
+                ))}
             </select>
             </div>
 
@@ -48,10 +59,10 @@ function BarraBusqueda() {
             <div className={BarraBusquedaStyle.filterItem}>
                 <label>Categoría:</label>
                 <select className={`${BarraBusquedaStyle.filter} ${BarraBusquedaStyle.FondoBlanco}`}>
-                <option>Selecciona una categoria</option>
-                <option value="Seminario">Seminario</option>
-                <option value="Concierto">Concierto</option>
-                <option value="Conferencia">Conferencia</option>
+                <option value="" >Selecciona una categoria</option>
+                {Categorias.map((cat) => (
+                        <option key={cat.id_Categoria} value={cat.nombre}>{cat.nombre}</option>
+                ))}
                 </select>
             </div>
             </div>

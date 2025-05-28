@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import ListaCategoriaStyles from "../Styles/ListaCategoria.module.css";
 import Cookies from "js-cookie";
@@ -22,26 +23,34 @@ function ListaCategorias({ modoSeleccion, onSeleccionarCategoria, onClose }) {
 
     return (
         <>
-            <h2 className={ListaCategoriaStyles.titulo}>Lista de Categorías</h2>
-            {loading ? (
-                <p>Cargando...</p>
-            ) : categorias.length === 0 ? (
-                <p>No hay categorías registradas.</p>
-            ) : (
-                <ul className={ListaCategoriaStyles.lista}>
-                    {categorias.map((cat) => (
-                        <li key={cat.id_Categoria} className={ListaCategoriaStyles.item}>
-                            <strong>ID:</strong> {cat.id_Categoria} <strong>Nombre:</strong> {cat.nombre}
-                            {modoSeleccion && (
-                                <button onClick={() => onSeleccionarCategoria(cat)} style={{marginLeft: 10}}>
-                                    Seleccionar
-                                </button>
-                            )}
-                        </li>
-                    ))}
-                </ul>
-            )}
-            <button onClick={onClose} style={{marginTop: 10}}>Cerrar</button>
+            <div className={ListaCategoriaStyles.modal}>
+            <div className={ListaCategoriaStyles.contenido}>
+                <button className={ListaCategoriaStyles.cerrar} onClick={onClose} aria-label="Cerrar modal">&times;</button>
+                <h2 className={ListaCategoriaStyles.titulo}>Lista de Categorías</h2>
+                {loading ? (
+                    <p>Cargando...</p>
+                ) : categorias.length === 0 ? (
+                    <p>No hay categorías registradas.</p>
+                ) : (
+                    <ul className={ListaCategoriaStyles.lista}>
+                        {categorias.map((cat) => (
+                            <li key={cat.id_Categoria} className={ListaCategoriaStyles.item}>
+                                <span><strong>ID:</strong> {cat.id_Categoria} <strong>Nombre:</strong> {cat.nombre}</span>
+                                {modoSeleccion && (
+                                    <button
+                                        className={ListaCategoriaStyles.botonSeleccionar}
+                                        onClick={() => onSeleccionarCategoria(cat)}
+                                    >
+                                        Seleccionar
+                                    </button>
+                                )}
+                            </li>
+                        ))}
+                    </ul>
+                )}
+                <button className={ListaCategoriaStyles.botonCerrar} onClick={onClose}>Cerrar</button>
+            </div>
+        </div>
         </>
     );
 }

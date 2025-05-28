@@ -2,7 +2,7 @@
     background-color: rgb(245, 245, 245);
     border-radius: 16px;
     width: 100%;
-    max-width: 400px;
+    max-width: 300px;
     display: flex;
     flex-direction: column;
     font-family: "Inter", system-ui, sans-serif;
@@ -11,7 +11,7 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     margin-left: auto;
     margin-right: auto;
-    height: 400px;
+    height: 350px;
 }
 
 .tarjeta:hover {
@@ -21,9 +21,10 @@
 
 .contenedorImagen {
     position: relative;
-    height: 200px;
+    height: 250px;
     width: 100%;
     overflow: hidden;
+    background-color: #817b7b;
 }
 
 .imagen {
@@ -45,10 +46,12 @@
 }
 
 .contenido {
-    padding: 20px;
+    padding: 0.3rem;
     display: flex;
     flex-direction: column;
     gap: 16px;
+    max-height: 130px;
+    height: 100%;
     font-family: sans-serif;
 
 }
@@ -57,14 +60,14 @@
     font-size: 22px;
     font-weight: 700;
     font-family: sans-serif;
-    margin: 0;
+    margin: -5px;
     color: #1a1a1a;
 }
 
 .rejillaInfo {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
+    gap: 5px;
 }
 
 .elementoInfo {
